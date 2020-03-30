@@ -198,6 +198,9 @@ public class Movil {
                             JOptionPane.showMessageDialog(null, "SE FINALIZARON LOS MOVIMIENTOS");
                             JOptionPane.showMessageDialog(null, "Fin");
                             frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
+                            //repintando el movil despues del tayecto. no funciona hay algo mas
+                            //frame.getMovil().getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+                            //frame.getMovil().getObjetoMovil().setVisible(true);
                             tiempo1.stop();
                         }
                     }
@@ -288,6 +291,10 @@ public class Movil {
     //FUNCION DE DELAY
     public void delay(int t) {
         try {
+            /*repintando cuadricula*/
+            frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
+//esta linea hace algo raro            
+//            frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
             Thread.sleep(t);
         } catch (InterruptedException ex) {
             Logger.getLogger(FrameOM.class.getName()).log(Level.SEVERE, null, ex);
@@ -307,12 +314,27 @@ public class Movil {
 
 /*
 
+1. Ejemplo Simple
+
 Ini trayecto
 MovDiagonal(100 cm, 3, -45 grados)
 Fin trayecto
 
 Ini trayecto
 MovRecto(100 cm, 3, adelante)
+Fin trayecto
+
+2. Ejemplo mas Complejo
+
+Ini  trayecto 
+MovRecto(100 cm, 3, adelante)
+MovRecto(100 cm, 2, abajo)
+MovRecto(100 cm, 1, atras)
+MovRecto(100 cm, 3, arriba)
+MovDiagonal(142 cm, 3, -45 grados)
+MovRecto(100 cm, 3, atras)
+MovDiagonal(142 cm, 3, 45 grados)
+MovRecto(100 cm, 3, atras)
 Fin trayecto
 
 

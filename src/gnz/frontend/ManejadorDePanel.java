@@ -113,4 +113,13 @@ public class ManejadorDePanel {
         this.manMatriz = manMatriz;
     }
 
+    /*agregamos metodos get y set de Graphic2D*/
+    public Graphics2D getG() {
+        return g;
+    }
+
+    public void setG(Graphics2D g) {
+        this.g = g;
+    }
+
 }

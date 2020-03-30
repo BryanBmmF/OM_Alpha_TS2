@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 public class FrameOM extends javax.swing.JFrame {
 
     //VARIABLES NECESARIAS
-    Movil movil = new Movil(this);
+    private Movil movil = new Movil(this);
     JFileChooser seleccionar = new JFileChooser();
     File Archivo;
     FileOutputStream salida;
@@ -54,11 +54,11 @@ public class FrameOM extends javax.swing.JFrame {
         //Elementos para movimieto libre del objeto movil
         movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("coche1.png")));
         System.out.println(getClass().getResource(""));
-        movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
-        movil.getObjetoMovil().setVisible(true);
+        //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+        //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -617,6 +617,10 @@ public class FrameOM extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        /*mostrando el OM hasta aui cambio 1*/
+        movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+        movil.getObjetoMovil().setVisible(true);
+        
         if ((!jTextField1.getText().equals("")) && (!jTextField2.getText().equals(""))) {
             int cordenadax = (Integer.parseInt(jTextField1.getText()) * Run.MULT);
             int cordenaday = (Integer.parseInt(jTextField2.getText()) * Run.MULT);
@@ -746,5 +750,15 @@ public class FrameOM extends javax.swing.JFrame {
     public JPanel getMatrizPanel() {
         return matrizPanel;
     }
+
+    public Movil getMovil() {
+        return movil;
+    }
+
+    public void setMovil(Movil movil) {
+        this.movil = movil;
+    }
+    
+    
 
 }

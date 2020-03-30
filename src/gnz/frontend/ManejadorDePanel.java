@@ -17,15 +17,14 @@ import javax.swing.JPanel;
  */
 public class ManejadorDePanel {
 
-
     private ManejadorMatriz manMatriz;
     private FrameOM frame;
     private Color color;
     private Color copiaColor;
     private int numeroDeCuadros;
     private Graphics2D g;
-    
-    public ManejadorDePanel(FrameOM frame,int numeroDeCuadros) {
+
+    public ManejadorDePanel(FrameOM frame, int numeroDeCuadros) {
         this.frame = frame;
         this.color = Color.BLACK;
         this.copiaColor = Color.BLACK;
@@ -44,14 +43,13 @@ public class ManejadorDePanel {
             g.drawLine(0, y, ManejadorMatriz.LONGITUD_PANEL, y);
         }
     }
-    
-    public void dibujarCuadriculaDeMatriz(ManejadorMatriz manMatriz,JPanel panel){
-        this.manMatriz =manMatriz;
+
+    public void dibujarCuadriculaDeMatriz(ManejadorMatriz manMatriz, JPanel panel) {
+        this.manMatriz = manMatriz;
         this.manMatriz.pintarCuadrosDeMatriz(g);
-        this.numeroDeCuadros=this.manMatriz.getNumeroDeCuadros();
+        this.numeroDeCuadros = this.manMatriz.getNumeroDeCuadros();
         pintarCuadricula(g);
-        
-        
+
     }
 
     public void accionParaClick(MouseEvent evt) {
@@ -61,7 +59,7 @@ public class ManejadorDePanel {
             System.out.println(evt.getX() + " " + evt.getY());
         } else if (evt.getButton() == MouseEvent.BUTTON3) {
             this.manMatriz.borrarPared(evt.getX(), evt.getY(), g);
-            System.out.println("IZQUIERDO");
+            System.out.println("BORRRRANDO PAREDDDDDDDDDDDDDDDD");
         }
         pintarCuadricula(g);
         double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
@@ -71,23 +69,34 @@ public class ManejadorDePanel {
     }
 
     public void accionParaMouseDragged(MouseEvent e) {
-        if (this.frame.seDebeBorrarAlMantenerPresionado()) {
+        /* if (this.frame.seDebeBorrarAlMantenerPresionado()) {
             this.color = Color.WHITE;
         } else {
             this.color = copiaColor;
+        }*/
+
+        if (this.frame.seDebeBorrarAlMantenerPresionado()) {
+            g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
+            this.manMatriz.borrarPared(e.getX(), e.getY(), g);
+            System.out.println(e.getX() + " " + e.getY());
+            double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
+            DecimalFormat df = new DecimalFormat("#");
+            String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
+            this.frame.cambiarTextoDeCoordenadas(texto);
+            pintarCuadricula(g);
+        } else {
+            g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
+            this.manMatriz.pintarPared(e.getX(), e.getY(), g, color);
+            System.out.println(e.getX() + " " + e.getY());
+            double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
+            DecimalFormat df = new DecimalFormat("#");
+            String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
+            this.frame.cambiarTextoDeCoordenadas(texto);
+            pintarCuadricula(g);
         }
 
-        g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
-        this.manMatriz.pintarPared(e.getX(), e.getY(), g, color);
-        System.out.println(e.getX() + " " + e.getY());
-        double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
-        DecimalFormat df = new DecimalFormat("#");
-        String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
-        this.frame.cambiarTextoDeCoordenadas(texto);
-        pintarCuadricula(g);
     }
 
-    
     public Color getColor() {
         return color;
     }

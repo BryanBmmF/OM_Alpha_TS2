@@ -21,10 +21,9 @@ import javax.swing.Timer;
  * @author Jonathan
  */
 public class Movil {
-    
+
     //Conexion Frame
     private FrameOM frame;
-
 
     //Lista de Coordenadas con las que choca el objeto movil (0,0) (800,800)
     public LinkedList<Coordenada> coordenadas = new LinkedList<Coordenada>();
@@ -84,7 +83,7 @@ public class Movil {
     JTextArea area;
 
     public Movil(FrameOM frameOm) {
-        this.frame=frameOm;
+        this.frame = frameOm;
         //DECLARACION DEL HILO
         tiempo1 = new Timer(1, new ActionListener() {
             @Override
@@ -196,15 +195,17 @@ public class Movil {
                             area.append("SE RECORRIO UNA DISTANCIA TOTAL DE " + distanciat + " CM\n");
                             area.append("SE FINALIZO EL MOVIMIENTO\n");
                             JOptionPane.showMessageDialog(null, "SE FINALIZARON LOS MOVIMIENTOS");
-                            JOptionPane.showMessageDialog(null, "Fin");
-                            frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
+                            //JOptionPane.showMessageDialog(null, "Fin");
+                            //frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
                             //repintando el movil despues del tayecto. no funciona hay algo mas
                             //frame.getMovil().getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
                             //frame.getMovil().getObjetoMovil().setVisible(true);
+                            objetoMovil.repaint();
                             tiempo1.stop();
                         }
                     }
                 }
+                frame.getManPanel().getManMatriz().ocuparDesocuparPosicion(objetoMovil.getX(), objetoMovil.getY());
             }
         });
     }
@@ -269,6 +270,12 @@ public class Movil {
         if ((((objetoMovil.getY()) / Run.MULT) > 184) || (((objetoMovil.getY()) / Run.MULT) < 0)) {
             return 1;
         }
+        //Comprobacion de si topa con pared
+        if (this.frame.getManPanel().getManMatriz().verificarSiPosicionEsPared(objetoMovil.getX(), objetoMovil.getY())) {
+            return 1;
+        }
+        System.out.println("PINTADO:" + this.frame.getManPanel().getManMatriz().buscarEnMatriz(objetoMovil.getX(), objetoMovil.getY()).estaPintado());
+
         return 0;
     }
 

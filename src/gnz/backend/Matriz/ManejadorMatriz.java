@@ -18,6 +18,10 @@ public class ManejadorMatriz implements Serializable {
     public final static int ALTITUD_PANEL = 620;
     public static final int LONGITUD_REALCM = 200;
 
+    //Constates para el tamano del Label(en pixeles)
+    public final static int ANCHO_OM = 27 * 3;
+    public final static int ALTO_OM = 16 * 3;
+
     private Celda[][] matriz;
     private int numeroDeCuadros;
 
@@ -47,42 +51,34 @@ public class ManejadorMatriz implements Serializable {
                 Celda celda = matriz[i][j];
                 if (celda.estaPintado()) {
                     celda.pintarCelda(celda.getColor(), g, numeroDeCuadros);
-                    System.out.println("Pintada:" + i + "," + j);
+                    //System.out.println("Pintada:" + i + "," + j);
                 } else {
-                    celda.pintarCelda(Color.WHITE, g, numeroDeCuadros);
+                    celda.borrarCelda(Color.WHITE, g, numeroDeCuadros);
                 }
             }
         }
     }
 
     private int averiguarEquivalenteEnMatriz(int numero) {
-//        System.out.println("/****************************************/");
-//        System.out.println("Numero:" + numero);
         int posEnMatriz;
         int relacion = LONGITUD_PANEL / numeroDeCuadros;
-        if (numero % relacion != 0) {
-            posEnMatriz = (numero / relacion) + 1;
-        } else {
-            posEnMatriz = (numero / relacion);
-        }
-//        System.out.println("Relacion:" + relacion);
-//        System.out.println("Resto:" + numero % relacion);
-//        System.out.println("Pos en matriz:" + posEnMatriz);
-//        System.out.println("/*******************************************/\n\n");
+        posEnMatriz = (numero / relacion);
         return posEnMatriz;
-
     }
 
-    
-    public boolean buscarSiPuntoEsPared(int x,int y){
-        return buscarEnMatriz(x, y).estaPintado();
-    }
-    
+
     public Celda buscarEnMatriz(int x, int y) {
         int xM = averiguarEquivalenteEnMatriz(x);
         int yM = averiguarEquivalenteEnMatriz(y);
         System.out.println("X:" + xM + " Y:" + yM);
-        return this.matriz[xM - 1][yM - 1];
+        if(xM==this.matriz.length){
+            xM--;
+        }
+        if(yM==this.matriz.length){
+            yM--;
+        }
+        
+        return this.matriz[xM][yM];
     }
 
     public void pintarPared(int x, int y, Graphics g, Color color) {
@@ -90,7 +86,55 @@ public class ManejadorMatriz implements Serializable {
     }
 
     public void borrarPared(int x, int y, Graphics g) {
-        buscarEnMatriz(x, y).pintarCelda(Color.WHITE, g, numeroDeCuadros);
+        buscarEnMatriz(x, y).borrarCelda(Color.WHITE, g, numeroDeCuadros);
+    }
+
+
+
+    public void ocuparDesocuparPosicion(int x, int y) {
+        desocuparPosicionDeOM();
+        //Se busca la posicion final
+        int posFinalAuto_X = x + ANCHO_OM;
+        int posFinalAuto_Y = y + ALTO_OM;
+        int longitudDeCuadro = ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros;
+        //Con la equivalencia se reduce el recorrido
+        for (int i = x; i < posFinalAuto_X; i += longitudDeCuadro) {
+            int eqx = averiguarEquivalenteEnMatriz(i);
+            for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
+                int eqy = averiguarEquivalenteEnMatriz(j);
+                System.out.println("Punto equivalente:(" + eqx + "," + eqy + ")");
+                    this.matriz[eqx][eqy].setEstaVisitado(true);
+               
+            }
+        }
+        //System.out.println("Inicio:(" + x + "," + y + ") Fin:(" + posFinalAuto_X + "," + posFinalAuto_Y + ")");
+    }
+
+    private void desocuparPosicionDeOM(){
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matriz[i][j].setEstaVisitado(false);
+            }
+        }
+    }
+    
+    public boolean verificarSiPosicionEsPared(int x, int y) {
+        int posFinalAuto_X = x + ANCHO_OM;
+        int posFinalAuto_Y = y + ALTO_OM;
+        int longitudDeCuadro = ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros;
+        //Con la equivalencia se reduce el recorrido
+        for (int i = x; i < posFinalAuto_X; i += longitudDeCuadro) {
+            int eqx = averiguarEquivalenteEnMatriz(i);
+            for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
+                int eqy = averiguarEquivalenteEnMatriz(j);
+                System.out.println("Punto equivalente para ver si es pared:(" + eqx + "," + eqy + ")");
+                if (this.matriz[eqx][eqy].estaPintado()) {
+                    System.out.println("DEVOLVEREMOS TRUE JAJAJAJAJAJAJAJAJA");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public Celda[][] getMatriz() {

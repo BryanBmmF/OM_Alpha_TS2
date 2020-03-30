@@ -58,7 +58,7 @@ public class FrameOM extends javax.swing.JFrame {
         //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -494,6 +494,7 @@ public class FrameOM extends javax.swing.JFrame {
     private void matrizPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseClicked
         this.manArchivos.setMapaEstaGuardado(false);
         this.manPanel.accionParaClick(evt);
+        System.out.println("PRECIONANDO(" + evt.getX() + "," + evt.getY() + ")");
     }//GEN-LAST:event_matrizPanelMouseClicked
 
     private void matrizPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseDragged
@@ -620,16 +621,21 @@ public class FrameOM extends javax.swing.JFrame {
         /*mostrando el OM hasta aui cambio 1*/
         movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         movil.getObjetoMovil().setVisible(true);
-        
         if ((!jTextField1.getText().equals("")) && (!jTextField2.getText().equals(""))) {
             int cordenadax = (Integer.parseInt(jTextField1.getText()) * Run.MULT);
             int cordenaday = (Integer.parseInt(jTextField2.getText()) * Run.MULT);
             movil.repos(cordenadax, cordenaday, jTextArea2);
             movil.limpiar();
-                    this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
-
+            movil.getObjetoMovil().repaint();
+            //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");
+            //System.out.println("YACTUAL:" + movil.getObjetoMovil().getY());
+            /**
+             * **********Accion para no pintar sobre el objeto movil***************
+             */
+            this.manPanel.getManMatriz().ocuparDesocuparPosicion(movil.getObjetoMovil().getX(), movil.getObjetoMovil().getY());
 
         }
+        this.manPanel.pintarCuadricula(this.manPanel.getG());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -758,7 +764,5 @@ public class FrameOM extends javax.swing.JFrame {
     public void setMovil(Movil movil) {
         this.movil = movil;
     }
-    
-    
 
 }

@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,36 +24,43 @@ public class Celda implements Serializable {
     public Celda(int limiteSuperiorX, int limiteSuperiorY, boolean estaPintado, boolean estaVisitado, Point posicionEnMatriz) {
         this.limiteSuperiorX = limiteSuperiorX;
         this.limiteSuperiorY = limiteSuperiorY;
-        this.estaPintado = estaPintado;
+        this.estaPintado = false;
         this.estaVisitado = estaVisitado;
         this.posicionEnMatriz = posicionEnMatriz;
     }
 
-    public void pintarCelda(Color color, Graphics g,int numeroDeCuadros) {
-        this.estaPintado = true;
-        this.color=color;
-        g.setColor(color);
-        System.out.println("LimiteSuperiorX:" + limiteSuperiorX);
-        System.out.println("LimiteSuperiorY:" + limiteSuperiorY);
-        int comodinX = limiteSuperiorX - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
-        int comodinY = limiteSuperiorY - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
-        for (int x = comodinX; x <= limiteSuperiorX; x++) {
-            for (int y = comodinY; y <= limiteSuperiorY; y++) {
-                g.drawLine(x, y, x, y);
+    public void pintarCelda(Color color, Graphics g, int numeroDeCuadros) {
+        if (estaVisitado) {
+            //JOptionPane.showMessageDialog(null, "No puede pintar sobre el objeto movil");
+        } else {
+            this.estaPintado = true;
+            this.color = color;
+            g.setColor(color);
+            System.out.println("ESTA OCUPADO:"+estaVisitado);
+            //System.out.println("LimiteSuperiorX:" + limiteSuperiorX);
+            //System.out.println("LimiteSuperiorY:" + limiteSuperiorY);
+            int comodinX = limiteSuperiorX - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
+            int comodinY = limiteSuperiorY - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
+            for (int x = comodinX; x <= limiteSuperiorX; x++) {
+                for (int y = comodinY; y <= limiteSuperiorY; y++) {
+                    g.drawLine(x, y, x, y);
+                }
             }
         }
+
     }
 
-    public void borrarCelda(Color color, Graphics g,int numeroDeCuadros) {
-        this.estaPintado = false;
-        g.setColor(color);
-        int comodinX = limiteSuperiorX - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
-        int comodinY = limiteSuperiorY - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
-        for (int x = comodinX; x <= limiteSuperiorX; x++) {
-            for (int y = comodinY; y <= limiteSuperiorY; y++) {
-                g.drawLine(x, y, x, y);
+    public void borrarCelda(Color color, Graphics g, int numeroDeCuadros) {
+            System.out.println("BORRRRRRRRRRRRRRRADO");
+            this.estaPintado = false;
+            g.setColor(color);
+            int comodinX = limiteSuperiorX - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
+            int comodinY = limiteSuperiorY - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
+            for (int x = comodinX; x <= limiteSuperiorX; x++) {
+                for (int y = comodinY; y <= limiteSuperiorY; y++) {
+                    g.drawLine(x, y, x, y);
+                }
             }
-        }
     }
 
     public int getLimiteInferior() {

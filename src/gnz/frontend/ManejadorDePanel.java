@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase para el Manejo del Panel en la Gui
  */
 package gnz.frontend;
 
@@ -113,6 +111,15 @@ public class ManejadorDePanel {
 
     public void setManMatriz(ManejadorMatriz manMatriz) {
         this.manMatriz = manMatriz;
+    }
+
+    /*agregamos metodos get y set de Graphic2D*/
+    public Graphics2D getG() {
+        return g;
+    }
+
+    public void setG(Graphics2D g) {
+        this.g = g;
     }
 
 }

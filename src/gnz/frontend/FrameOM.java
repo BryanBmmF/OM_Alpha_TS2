@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Gui
  */
 package gnz.frontend;
 
@@ -10,7 +8,6 @@ import gnz.analizadores.parser;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
-import gnz.backend.objetoMovil.Archivos;
 import gnz.backend.objetoMovil.Coordenada;
 import gnz.backend.objetoMovil.Movil;
 import java.awt.Color;
@@ -34,7 +31,7 @@ import javax.swing.JPanel;
 public class FrameOM extends javax.swing.JFrame {
 
     //VARIABLES NECESARIAS
-    Movil movil = new Movil(this);
+    private Movil movil = new Movil(this);
     JFileChooser seleccionar = new JFileChooser();
     File Archivo;
     FileOutputStream salida;
@@ -57,11 +54,11 @@ public class FrameOM extends javax.swing.JFrame {
         //Elementos para movimieto libre del objeto movil
         movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("coche1.png")));
         System.out.println(getClass().getResource(""));
-        movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
-        movil.getObjetoMovil().setVisible(true);
+        //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+        //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -570,7 +567,7 @@ public class FrameOM extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //ABRIR EL ARCHIVO
         jTextArea1.setText("");
-        Archivos arc = new Archivos();
+        ManejadorDeArchivos arc = new ManejadorDeArchivos(this);
         File f = arc.Abrir();
         if (f != null) {
             jTextArea1.setText(arc.leer(f.toString()));
@@ -620,6 +617,10 @@ public class FrameOM extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        /*mostrando el OM hasta aui cambio 1*/
+        movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+        movil.getObjetoMovil().setVisible(true);
+        
         if ((!jTextField1.getText().equals("")) && (!jTextField2.getText().equals(""))) {
             int cordenadax = (Integer.parseInt(jTextField1.getText()) * Run.MULT);
             int cordenaday = (Integer.parseInt(jTextField2.getText()) * Run.MULT);
@@ -749,5 +750,15 @@ public class FrameOM extends javax.swing.JFrame {
     public JPanel getMatrizPanel() {
         return matrizPanel;
     }
+
+    public Movil getMovil() {
+        return movil;
+    }
+
+    public void setMovil(Movil movil) {
+        this.movil = movil;
+    }
+    
+    
 
 }

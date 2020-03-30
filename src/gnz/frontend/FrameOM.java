@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Gui
  */
 package gnz.frontend;
 
@@ -10,7 +8,6 @@ import gnz.analizadores.parser;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
-import gnz.backend.objetoMovil.Archivos;
 import gnz.backend.objetoMovil.Coordenada;
 import gnz.backend.objetoMovil.Movil;
 import java.awt.Color;
@@ -570,7 +567,7 @@ public class FrameOM extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //ABRIR EL ARCHIVO
         jTextArea1.setText("");
-        Archivos arc = new Archivos();
+        ManejadorDeArchivos arc = new ManejadorDeArchivos(this);
         File f = arc.Abrir();
         if (f != null) {
             jTextArea1.setText(arc.leer(f.toString()));

@@ -4,7 +4,7 @@
 package gnz.frontend;
 
 import gnz.analizadores.Lexico;
-import gnz.analizadores.parser;
+import gnz.analizadores.parser1;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
@@ -623,7 +623,7 @@ public class FrameOM extends javax.swing.JFrame {
         if (!jTextArea1.getText().equals("")) {
 
             Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
-            parser sin1 = new parser(lexico);
+            parser1 sin1 = new parser1(lexico);
             try {
                 sin1.parse();
             } catch (Exception e) {

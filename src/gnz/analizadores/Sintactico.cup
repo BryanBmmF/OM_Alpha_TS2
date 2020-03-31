@@ -1,9 +1,9 @@
-package analizadores; 
+package gnz.analizadores;
+
 import java_cup.runtime.*;
 import java.util.LinkedList;
-import objetomovil4.*;
-import objetos.Movimiento;
-
+//import objetomovil4.*;
+import gnz.backend.objetoMovil.Movimiento;
 
 parser code 
 {:

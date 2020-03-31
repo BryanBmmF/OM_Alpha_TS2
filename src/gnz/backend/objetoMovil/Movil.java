@@ -5,9 +5,11 @@ package gnz.backend.objetoMovil;
 
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
+import gnz.backend.manejadores.ManejadorDeLog;
 import gnz.frontend.FrameOM;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -195,6 +197,11 @@ public class Movil {
                             area.append("SE RECORRIO UNA DISTANCIA TOTAL DE " + distanciat + " CM\n");
                             area.append("SE FINALIZO EL MOVIMIENTO\n");
                             JOptionPane.showMessageDialog(null, "SE FINALIZARON LOS MOVIMIENTOS");
+                            try {
+                                ManejadorDeLog.guardarAccion("ESTO ES UNA PRUEBA");
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Movil.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             //JOptionPane.showMessageDialog(null, "Fin");
                             //frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
                             //repintando el movil despues del tayecto. no funciona hay algo mas

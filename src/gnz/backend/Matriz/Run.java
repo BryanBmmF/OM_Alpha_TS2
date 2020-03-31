@@ -3,7 +3,8 @@
  */
 package gnz.backend.Matriz;
 
-import gnz.frontend.FrameOM;
+import gnz.frontend.inicioSesionFrame;
+
 
 /**
  *
@@ -12,8 +13,9 @@ import gnz.frontend.FrameOM;
 public class Run {
 
     public static int MULT = 3;
+
     public static void main(String[] args) {
-        new FrameOM();
+        new inicioSesionFrame();
     }
 
 }

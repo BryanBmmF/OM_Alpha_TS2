@@ -10,6 +10,8 @@ import gnz.frontend.FrameOM;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,16 +32,31 @@ public class ManejadorDeLog {
     }
 
     private static void guardarAccionEnHistorial(String descripcion) throws SQLException {
-        String consulta="INSERT INTO HISTORIAL(Descripcion,Fecha) VALUES(?,?)";
-        PreparedStatement sentencia =Conexion.getConexion().prepareStatement(consulta);
-        sentencia.setString(1, descripcion);
-        sentencia.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+        String consulta;
+        PreparedStatement sentencia;
+        if (FrameOM.getIdUsuario() == null) {
+            consulta = "INSERT INTO HISTORIAL(Descripcion,Fecha) VALUES(?,?)";
+            sentencia = Conexion.getConexion().prepareStatement(consulta);
+            sentencia.setString(1, descripcion);
+            sentencia.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+
+        } else {//Existe un usuario
+            consulta = "INSERT INTO HISTORIAL(Descripcion,Fecha,Usuario) VALUES(?,?,?)";
+            sentencia = Conexion.getConexion().prepareStatement(consulta);
+            sentencia.setString(1, descripcion);
+            sentencia.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            sentencia.setString(3, FrameOM.getIdUsuario());
+        }
         sentencia.execute();
     }
 
-    public static void guardarAccion(String descripcion) throws SQLException{
-        guardarAccionParaUsuario(descripcion);
-        guardarAccionEnHistorial(descripcion);
+    public static void guardarAccion(String descripcion) {
+        try {
+            guardarAccionParaUsuario(descripcion);
+            guardarAccionEnHistorial(descripcion);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-    
+
 }

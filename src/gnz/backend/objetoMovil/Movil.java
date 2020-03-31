@@ -90,6 +90,7 @@ public class Movil {
         tiempo1 = new Timer(1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String descripcion;
                 if (bandera) {
                     //LIMPIAR VARIABLES Y LLENAR TODAS VARIABLES CON INFORMACION
 
@@ -186,27 +187,19 @@ public class Movil {
                 if (!comprobar()) {
                     if (x1 == objetoMovil.getX() && y1 == objetoMovil.getY()) {
                         bandera = true;
-                        area.append("--------------------MOVIMIENTO NUMERO " + (n + 1) + " EXITOSO--------------------\n");
-                        area.append("CON DISTANCIA = " + Movimientos.get(n).distancia + ", VELOCIDAD = " + Movimientos.get(n).velocidad + " Y ANGULO = " + Movimientos.get(n).angulo + "\n");
-                        area.append("SUS NUEVAS COORDENADAS SON X = " + (objetoMovil.getX() / Run.MULT) + ", Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n");
+                        descripcion = "--------------------MOVIMIENTO NUMERO " + (n + 1) + " EXITOSO--------------------\n"
+                                + "CON DISTANCIA = " + Movimientos.get(n).distancia + ", VELOCIDAD = " + Movimientos.get(n).velocidad + " Y ANGULO = " + Movimientos.get(n).angulo + "\n"
+                                + "SUS NUEVAS COORDENADAS SON X = " + (objetoMovil.getX() / Run.MULT) + ", Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n";
+                        area.append(descripcion);
+                        ManejadorDeLog.guardarAccion(descripcion);
                         n = n + 1;
-                        System.out.println("" + objetoMovil.getX() + "\n");
-                        System.out.println("" + objetoMovil.getY() + "\n");
                         if (n >= Movimientos.size()) {
-                            area.append("SE REALIZARON UN TOTAL DE  " + (n) + " MOVIMIENTOS\n");
-                            area.append("SE RECORRIO UNA DISTANCIA TOTAL DE " + distanciat + " CM\n");
-                            area.append("SE FINALIZO EL MOVIMIENTO\n");
+                            descripcion = "SE REALIZARON UN TOTAL DE  " + (n) + " MOVIMIENTOS\n"
+                                    + "SE RECORRIO UNA DISTANCIA TOTAL DE " + distanciat + " CM\n"
+                                    + "SE FINALIZO EL MOVIMIENTO\n";
+                            area.append(descripcion);
                             JOptionPane.showMessageDialog(null, "SE FINALIZARON LOS MOVIMIENTOS");
-                            try {
-                                ManejadorDeLog.guardarAccion("ESTO ES UNA PRUEBA");
-                            } catch (SQLException ex) {
-                                Logger.getLogger(Movil.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            //JOptionPane.showMessageDialog(null, "Fin");
-                            //frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
-                            //repintando el movil despues del tayecto. no funciona hay algo mas
-                            //frame.getMovil().getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
-                            //frame.getMovil().getObjetoMovil().setVisible(true);
+                            ManejadorDeLog.guardarAccion(descripcion);
                             objetoMovil.repaint();
                             tiempo1.stop();
                         }
@@ -226,8 +219,9 @@ public class Movil {
         this.label8 = label8;
         this.area = area;
         distanciat = 0;
-        area.append("--------------------INICIO DEL MOVIMIENTO EN LAS COORDENADAS--------------------\n");
-        area.append("Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n");
+        String descripcion = "--------------------INICIO DEL MOVIMIENTO EN LAS COORDENADAS--------------------\n"
+                + "Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n";
+        area.append(descripcion);
         tiempo1.start();
     }
 
@@ -237,18 +231,22 @@ public class Movil {
         objetoMovil.repaint();
         this.area = area;
         comprobar();
-        area.append("--------------------SE REPOCISIONO EL OBJETO EN LAS CORDENADAS--------------------\n");
-        area.append("Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n");
+        String descripcion = "--------------------SE REPOCISIONO EL OBJETO EN LAS CORDENADAS--------------------\n"
+                + "Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n";
+        area.append(descripcion);
 
     }
 
     //METDO PARA COMPROBAR LAS COORDENADAS OCUPADAS
     private boolean comprobar() {
+        String descripcion;
         int l = limites();
         if (l == 1) {
-            area.append("----------------------ERROR EN EL OBJETO MOVIL----------------------\n");
-            area.append("---------------------------COLISION EN------------------------------\n");
-            area.append("Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n");
+            descripcion = "----------------------ERROR EN EL OBJETO MOVIL----------------------\n"
+                    + "---------------------------COLISION EN------------------------------\n"
+                    + "Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n";
+            area.append(descripcion);
+            ManejadorDeLog.guardarAccion(descripcion);
             JOptionPane.showMessageDialog(null, "EL OBJETO MOVIL CHOCO");
             tiempo1.stop();
             return true;
@@ -256,9 +254,11 @@ public class Movil {
         } else {
             for (int i = 0; i < coordenadas.size(); i++) {
                 if (((coordenadas.get(i).x >= objetoMovil.getX()) && (coordenadas.get(i).x <= objetoMovil.getX() + (26 * Run.MULT))) && ((coordenadas.get(i).y >= objetoMovil.getY()) && (coordenadas.get(i).y <= objetoMovil.getY() + (16 * Run.MULT)))) {
-                    area.append("----------ERROR EN EL OBJETO MOVIL----------\n");
-                    area.append("---------------COLISION EN------------------\n");
-                    area.append("Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n");
+                    descripcion = "----------ERROR EN EL OBJETO MOVIL----------\n"
+                            + "---------------COLISION EN------------------\n"
+                            + "Cordenada X=" + (objetoMovil.getX() / Run.MULT) + "   Cordenada Y=" + (objetoMovil.getY() / Run.MULT) + "\n\n";
+                    area.append(descripcion);
+                    ManejadorDeLog.guardarAccion(descripcion);
                     JOptionPane.showMessageDialog(null, "EL OBJETO MOVIL CHOCO");
                     tiempo1.stop();
                     return true;
@@ -281,7 +281,7 @@ public class Movil {
         if (this.frame.getManPanel().getManMatriz().verificarSiPosicionEsPared(objetoMovil.getX(), objetoMovil.getY())) {
             return 1;
         }
-        System.out.println("PINTADO:" + this.frame.getManPanel().getManMatriz().buscarEnMatriz(objetoMovil.getX(), objetoMovil.getY()).estaPintado());
+        //System.out.println("PINTADO:" + this.frame.getManPanel().getManMatriz().buscarEnMatriz(objetoMovil.getX(), objetoMovil.getY()).estaPintado());
 
         return 0;
     }

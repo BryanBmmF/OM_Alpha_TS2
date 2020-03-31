@@ -8,6 +8,7 @@ import gnz.analizadores.parser1;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
+import gnz.backend.manejadores.ManejadorDeSesiones;
 import gnz.backend.objetoMovil.Coordenada;
 import gnz.backend.objetoMovil.Movil;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringReader;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +32,10 @@ import javax.swing.JPanel;
  */
 public class FrameOM extends javax.swing.JFrame {
 
+    //Variables para el usuario
+    public static String idUsuario;
+    public static int idSesion;
+
     //VARIABLES NECESARIAS
     private Movil movil = new Movil(this);
     JFileChooser seleccionar = new JFileChooser();
@@ -41,9 +47,13 @@ public class FrameOM extends javax.swing.JFrame {
 
     /**
      * Creates new form LaberintoFrame
+     *
+     * @param user
      */
-    public FrameOM() {
+    public FrameOM(String user) {
+        idUsuario = user;
         initComponents();
+        colocarUsuario();
         this.setVisible(true);
         setLocationRelativeTo(null);
         setTitle("Objeto Movil");
@@ -52,7 +62,7 @@ public class FrameOM extends javax.swing.JFrame {
         actualizarEquivalencia();
         this.manArchivos = new ManejadorDeArchivos(this);
         //Elementos para movimieto libre del objeto movil
-        movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("coche1.png")));
+        movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("Imagenes/coche1.png")));
         System.out.println(getClass().getResource(""));
         //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         //movil.getObjetoMovil().setVisible(true);
@@ -107,6 +117,8 @@ public class FrameOM extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        userjLabel = new javax.swing.JLabel();
+        cerrarSesionjButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -466,13 +478,30 @@ public class FrameOM extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Movimiento Libre", jPanel4);
 
+        userjLabel.setText("Usuario:");
+
+        cerrarSesionjButton.setText("Cerrar Sesion");
+        cerrarSesionjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(userjLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cerrarSesionjButton)))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
@@ -480,12 +509,18 @@ public class FrameOM extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(userjLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(cerrarSesionjButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -630,7 +665,8 @@ public class FrameOM extends javax.swing.JFrame {
             //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");
             //System.out.println("YACTUAL:" + movil.getObjetoMovil().getY());
             /**
-             * **********Accion para no pintar sobre el objeto movil***************
+             * **********Accion para no pintar sobre el objeto
+             * movil***************
              */
             this.manPanel.getManMatriz().ocuparDesocuparPosicion(movil.getObjetoMovil().getX(), movil.getObjetoMovil().getY());
 
@@ -676,6 +712,11 @@ public class FrameOM extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void cerrarSesionjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionjButtonActionPerformed
+        this.dispose();
+        new inicioSesionFrame();
+    }//GEN-LAST:event_cerrarSesionjButtonActionPerformed
+
     public String guardar(File Archivo, String documento) {
         String mensaje = null;
         try {
@@ -695,6 +736,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JButton borrarMapajButton;
     private javax.swing.JButton cambiarColorButton;
     private javax.swing.JComboBox<String> cambiarCuadriculajComboBox;
+    private javax.swing.JButton cerrarSesionjButton;
     private javax.swing.JLabel coordenadasjLabel;
     private javax.swing.JLabel equivalenciajLabel;
     private javax.swing.JButton guardarComojButton;
@@ -729,7 +771,22 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel matrizPanel;
     private javax.swing.JButton nuevoMapajButton;
+    private javax.swing.JLabel userjLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void colocarUsuario() {
+        if (idUsuario != null) {
+            this.userjLabel.setText("Ingreso como:" + idUsuario);
+            try {
+                ManejadorDeSesiones.guardarSesion(idUsuario);
+                idSesion=ManejadorDeSesiones.consultarUltimaSesion();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            this.userjLabel.setText("NO SE HA INICIADO SESION");
+        }
+    }
 
     public void cambiarTextoDeCoordenadas(String texto) {
         this.coordenadasjLabel.setText(texto);
@@ -765,4 +822,11 @@ public class FrameOM extends javax.swing.JFrame {
         this.movil = movil;
     }
 
+    public static String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public static int getIdSesion(){
+        return idSesion;
+    }
 }

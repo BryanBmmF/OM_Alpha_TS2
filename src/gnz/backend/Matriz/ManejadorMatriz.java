@@ -3,10 +3,12 @@
  */
 package gnz.backend.Matriz;
 
+import gnz.frontend.ManejadorDePanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -19,8 +21,11 @@ public class ManejadorMatriz implements Serializable {
     public static final int LONGITUD_REALCM = 200;
 
     //Constates para el tamano del Label(en pixeles)
-    public final static int ANCHO_OM = 27 * 3;
-    public final static int ALTO_OM = 16 * 3;
+    private static final Double REAJUSTE_ANCHO = 28 * 3.01799;
+    private static final Double REAJUSTE_ALTO = 17 * 3.01799;
+
+    public final static int ANCHO_OM = redondear(REAJUSTE_ANCHO);
+    public final static int ALTO_OM = redondear(REAJUSTE_ALTO);
 
     private Celda[][] matriz;
     private int numeroDeCuadros;
@@ -49,7 +54,7 @@ public class ManejadorMatriz implements Serializable {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
                 Celda celda = matriz[i][j];
-                if (celda.estaPintado()) {
+                if (celda.estaPintado() || celda.getVelocidadDeAuto()>ManejadorDePanel.VELOCIDAD_SIN_SUPERFICIE) {
                     celda.pintarCelda(celda.getColor(), g, numeroDeCuadros);
                     //System.out.println("Pintada:" + i + "," + j);
                 } else {
@@ -66,30 +71,27 @@ public class ManejadorMatriz implements Serializable {
         return posEnMatriz;
     }
 
-
     public Celda buscarEnMatriz(int x, int y) {
         int xM = averiguarEquivalenteEnMatriz(x);
         int yM = averiguarEquivalenteEnMatriz(y);
         System.out.println("X:" + xM + " Y:" + yM);
-        if(xM==this.matriz.length){
+        if (xM == this.matriz.length) {
             xM--;
         }
-        if(yM==this.matriz.length){
+        if (yM == this.matriz.length) {
             yM--;
         }
-        
+
         return this.matriz[xM][yM];
     }
 
     public void pintarPared(int x, int y, Graphics g, Color color) {
-        buscarEnMatriz(x, y).pintarCelda(color, g, numeroDeCuadros);
+        if (color == ManejadorDePanel.COLOR_SIN_SUPERFICIE) {
+            buscarEnMatriz(x, y).borrarCelda(Color.WHITE, g, numeroDeCuadros);
+        } else {
+            buscarEnMatriz(x, y).pintarCelda(color, g, numeroDeCuadros);
+        }
     }
-
-    public void borrarPared(int x, int y, Graphics g) {
-        buscarEnMatriz(x, y).borrarCelda(Color.WHITE, g, numeroDeCuadros);
-    }
-
-
 
     public void ocuparDesocuparPosicion(int x, int y) {
         desocuparPosicionDeOM();
@@ -103,21 +105,21 @@ public class ManejadorMatriz implements Serializable {
             for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
                 int eqy = averiguarEquivalenteEnMatriz(j);
                 System.out.println("Punto equivalente:(" + eqx + "," + eqy + ")");
-                    this.matriz[eqx][eqy].setEstaVisitado(true);
-               
+                this.matriz[eqx][eqy].setEstaVisitado(true);
+
             }
         }
         //System.out.println("Inicio:(" + x + "," + y + ") Fin:(" + posFinalAuto_X + "," + posFinalAuto_Y + ")");
     }
 
-    private void desocuparPosicionDeOM(){
+    private void desocuparPosicionDeOM() {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
                 matriz[i][j].setEstaVisitado(false);
             }
         }
     }
-    
+
     public boolean verificarSiPosicionEsPared(int x, int y) {
         int posFinalAuto_X = x + ANCHO_OM;
         int posFinalAuto_Y = y + ALTO_OM;
@@ -135,6 +137,12 @@ public class ManejadorMatriz implements Serializable {
             }
         }
         return false;
+    }
+
+    private static int redondear(Double n) {
+        DecimalFormat df = new DecimalFormat("#");
+        return Integer.valueOf(df.format(n));
+
     }
 
     public Celda[][] getMatriz() {

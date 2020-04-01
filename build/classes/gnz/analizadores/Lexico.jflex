@@ -1,7 +1,7 @@
-package analizadores; // Paquete donde estará nuestro scanner
+package gnz.analizadores; // Paquete donde estará nuestro scanner
 import java_cup.runtime.Symbol; 
-import objetomovil4.*;
-import objetos.Movimiento;
+//import objetomovil4.*;
+import gnz.backend.objetoMovil.Movimiento;
 %% 
 
 %{

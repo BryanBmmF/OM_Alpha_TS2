@@ -316,7 +316,7 @@ public class Movil {
             /*repintando cuadricula*/
             frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
             
-            frame.getManPanel().getManMatriz().pintarCuadrosDeMatriz(frame.getManPanel().getG());
+            //frame.getManPanel().getManMatriz().pintarCuadrosDeMatriz(frame.getManPanel().getG());
             
             
 //esta linea hace algo raro            

@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/GitHub/OM/OM_Alpha_TS2/src/gnz/backend/objetoMovil/Movimiento.java</file>
-            <file>file:/D:/Documentos/GitHub/OM/OM_Alpha_TS2/src/gnz/backend/objetoMovil/MovimientoBase.java</file>
-            <file>file:/D:/Documentos/GitHub/OM/OM_Alpha_TS2/src/gnz/backend/objetoMovil/Movil.java</file>
-            <file>file:/D:/Documentos/GitHub/OM/OM_Alpha_TS2/src/gnz/backend/conexion/Conexion.java</file>
-            <file>file:/D:/Documentos/GitHub/OM/OM_Alpha_TS2/src/gnz/analizadores/compilar.bat</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/backend/Objetos/ComunicarArduino.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/frontend/ManejadorDePanel.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/backend/Matriz/Celda.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/backend/Matriz/ManejadorMatriz.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/frontend/FrameOM.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/backend/objetoMovil/Movil.java</file>
+            <file>file:/home/jesfrin/Documentos/Usac/Septimo/Teoria%20de%20sistemas%202/ObjetoMovil3/OM_Alpha_TS2/src/gnz/backend/conexion/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

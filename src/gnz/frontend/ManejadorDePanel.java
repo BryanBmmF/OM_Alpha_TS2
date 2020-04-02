@@ -17,17 +17,25 @@ import javax.swing.JPanel;
  */
 public class ManejadorDePanel {
 
+    //Colores disponibles
+    public static Color COLOR_LISO = Color.GREEN;
+    public static Color COLOR_RUGOSO = Color.DARK_GRAY;
+    public static Color COLOR_SIN_SUPERFICIE = Color.WHITE;
+    public static Color COLOR_PARED = Color.BLACK;
+
+    //Velocidades segun los colores
+    public static int VELOCIDAD_LISO = 10;
+    public static int VELOCIDAD_SIN_SUPERFICIE = 8;
+    public static int VELOCIDAD_RUGOSO = 3;
+    public static int VELOCIDAD_PARED = 0;
+
     private ManejadorMatriz manMatriz;
     private FrameOM frame;
-    private Color color;
-    private Color copiaColor;
     private int numeroDeCuadros;
     private Graphics2D g;
 
     public ManejadorDePanel(FrameOM frame, int numeroDeCuadros) {
         this.frame = frame;
-        this.color = Color.BLACK;
-        this.copiaColor = Color.BLACK;
         this.numeroDeCuadros = numeroDeCuadros;
         this.manMatriz = new ManejadorMatriz(numeroDeCuadros);
 
@@ -52,15 +60,10 @@ public class ManejadorDePanel {
 
     }
 
-    public void accionParaClick(MouseEvent evt) {
+    public void accionParaClick(MouseEvent evt, Color color) {
         g = (Graphics2D) ((JPanel) evt.getSource()).getGraphics();
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            this.manMatriz.pintarPared(evt.getX(), evt.getY(), g, color);
-            System.out.println(evt.getX() + " " + evt.getY());
-        } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            this.manMatriz.borrarPared(evt.getX(), evt.getY(), g);
-            System.out.println("BORRRRANDO PAREDDDDDDDDDDDDDDDD");
-        }
+        this.manMatriz.pintarPared(evt.getX(), evt.getY(), g, color);
+        System.out.println(evt.getX() + " " + evt.getY());
         pintarCuadricula(g);
         double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
         DecimalFormat df = new DecimalFormat("#");
@@ -68,42 +71,16 @@ public class ManejadorDePanel {
         this.frame.cambiarTextoDeCoordenadas(texto);
     }
 
-    public void accionParaMouseDragged(MouseEvent e) {
-        /* if (this.frame.seDebeBorrarAlMantenerPresionado()) {
-            this.color = Color.WHITE;
-        } else {
-            this.color = copiaColor;
-        }*/
+    public void accionParaMouseDragged(MouseEvent e, Color color) {
+        g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
+        this.manMatriz.pintarPared(e.getX(), e.getY(), g, color);
+        System.out.println(e.getX() + " " + e.getY());
+        double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
+        DecimalFormat df = new DecimalFormat("#");
+        String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
+        this.frame.cambiarTextoDeCoordenadas(texto);
+        pintarCuadricula(g);
 
-        if (this.frame.seDebeBorrarAlMantenerPresionado()) {
-            g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
-            this.manMatriz.borrarPared(e.getX(), e.getY(), g);
-            System.out.println(e.getX() + " " + e.getY());
-            double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
-            DecimalFormat df = new DecimalFormat("#");
-            String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
-            this.frame.cambiarTextoDeCoordenadas(texto);
-            pintarCuadricula(g);
-        } else {
-            g = (Graphics2D) ((JPanel) e.getSource()).getGraphics();
-            this.manMatriz.pintarPared(e.getX(), e.getY(), g, color);
-            System.out.println(e.getX() + " " + e.getY());
-            double n = (ManejadorMatriz.LONGITUD_REALCM + 0.0) / (ManejadorMatriz.LONGITUD_PANEL + 0.0);
-            DecimalFormat df = new DecimalFormat("#");
-            String texto = "Coordenada x:" + df.format((n * e.getX())) + " Coordenada y:" + df.format(n * e.getY());
-            this.frame.cambiarTextoDeCoordenadas(texto);
-            pintarCuadricula(g);
-        }
-
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-        this.copiaColor = color;
     }
 
     public int getNumeroDeCuadros() {

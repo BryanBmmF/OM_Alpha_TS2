@@ -69,6 +69,7 @@ public class FrameOM extends javax.swing.JFrame {
         //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
+        agregarGrupoDeBotones();
     }
 
     /**
@@ -81,6 +82,7 @@ public class FrameOM extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        grupoDeBotones = new javax.swing.ButtonGroup();
         matrizPanel = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -99,6 +101,12 @@ public class FrameOM extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         borrarMapajButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        paredjRadioButton = new javax.swing.JRadioButton();
+        sinSuperficiejRadioButton = new javax.swing.JRadioButton();
+        rugosojRadioButton = new javax.swing.JRadioButton();
+        lisojRadioButton = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -229,28 +237,76 @@ public class FrameOM extends javax.swing.JFrame {
             .addGap(0, 75, Short.MAX_VALUE)
         );
 
+        jPanel1.setForeground(javax.swing.UIManager.getDefaults().getColor("MenuBar.highlight"));
+
+        jLabel10.setText("Texturas disponibles");
+
+        paredjRadioButton.setForeground(new java.awt.Color(1, 1, 1));
+        paredjRadioButton.setText("Pared");
+
+        sinSuperficiejRadioButton.setText("Sin superficie(Blanco)");
+
+        rugosojRadioButton.setText("Rugoso(Gris Oscuro)");
+
+        lisojRadioButton.setForeground(java.awt.Color.green);
+        lisojRadioButton.setText("Liso");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(paredjRadioButton)
+                            .addComponent(lisojRadioButton)
+                            .addComponent(sinSuperficiejRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(rugosojRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel10)))
+                .addContainerGap(119, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(paredjRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sinSuperficiejRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rugosojRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lisojRadioButton)
+                .addGap(0, 45, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(coordenadasjLabel)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cambiarCuadriculajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(borrarCheckBox)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coordenadasjLabel)
-                            .addComponent(jLabel2)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(equivalenciajLabel)))
+                        .addGap(62, 62, 62)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(equivalenciajLabel))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,25 +319,30 @@ public class FrameOM extends javax.swing.JFrame {
                             .addComponent(nuevoMapajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(guardarMapajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(coordenadasjLabel)
-                .addGap(18, 18, 18)
-                .addComponent(borrarCheckBox)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cambiarCuadriculajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(equivalenciajLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(borrarCheckBox)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(cambiarCuadriculajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(equivalenciajLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrarMapajButton)
@@ -298,7 +359,7 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mapa", jPanel3);
@@ -445,6 +506,14 @@ public class FrameOM extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(45, 45, 45)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(245, Short.MAX_VALUE)))
+
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,18 +607,20 @@ public class FrameOM extends javax.swing.JFrame {
 
     private void matrizPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseClicked
         this.manArchivos.setMapaEstaGuardado(false);
-        this.manPanel.accionParaClick(evt);
-        System.out.println("PRECIONANDO(" + evt.getX() + "," + evt.getY() + ")");
+        this.manPanel.accionParaClick(evt,averiguarColorSeleccionado());
+//        System.out.println("PRECIONANDO(" + evt.getX() + "," + evt.getY() + ")");
     }//GEN-LAST:event_matrizPanelMouseClicked
 
     private void matrizPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseDragged
         this.manArchivos.setMapaEstaGuardado(false);
-        this.manPanel.accionParaMouseDragged(evt);
+        this.manPanel.accionParaMouseDragged(evt,averiguarColorSeleccionado());
     }//GEN-LAST:event_matrizPanelMouseDragged
 
     private void borrarMapajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarMapajButtonActionPerformed
         this.matrizPanel.setBackground(Color.BLACK);
         this.matrizPanel.setBackground(Color.WHITE);
+        this.manPanel= new ManejadorDePanel(this,Integer.valueOf(String.valueOf(this.cambiarCuadriculajComboBox.getSelectedItem())));
+       
     }//GEN-LAST:event_borrarMapajButtonActionPerformed
 
     private void nuevoMapajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoMapajButtonActionPerformed
@@ -589,9 +660,10 @@ public class FrameOM extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarMapajButtonActionPerformed
 
     private void cambiarColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorButtonActionPerformed
-        JColorChooser colorChooser = new JColorChooser();
-        Color color = colorChooser.showDialog(null, "Seleccione un color", this.manPanel.getColor());
-        this.manPanel.setColor(color);
+        //JColorChooser colorChooser = new JColorChooser();
+        //Color color = colorChooser.showDialog(null, "Seleccione un color", this.manPanel.getColor());
+        //this.manPanel.setColor(color);
+        JOptionPane.showMessageDialog(this, "Esta opcion no esta disponible");
     }//GEN-LAST:event_cambiarColorButtonActionPerformed
 
     private void cambiarCuadriculajComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarCuadriculajComboBoxActionPerformed
@@ -766,6 +838,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JButton cerrarSesionjButton;
     private javax.swing.JLabel coordenadasjLabel;
     private javax.swing.JLabel equivalenciajLabel;
+    private javax.swing.ButtonGroup grupoDeBotones;
     private javax.swing.JButton guardarComojButton;
     private javax.swing.JButton guardarMapajButton;
     private javax.swing.JButton jButton1;
@@ -778,6 +851,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -785,6 +859,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -797,8 +872,12 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JRadioButton lisojRadioButton;
     private javax.swing.JPanel matrizPanel;
     private javax.swing.JButton nuevoMapajButton;
+    private javax.swing.JRadioButton paredjRadioButton;
+    private javax.swing.JRadioButton rugosojRadioButton;
+    private javax.swing.JRadioButton sinSuperficiejRadioButton;
     private javax.swing.JLabel userjLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -816,6 +895,27 @@ public class FrameOM extends javax.swing.JFrame {
         }
     }
 
+    public void agregarGrupoDeBotones(){
+        grupoDeBotones.add(paredjRadioButton);
+        grupoDeBotones.add(sinSuperficiejRadioButton);
+        grupoDeBotones.add(rugosojRadioButton);
+        grupoDeBotones.add(lisojRadioButton);
+    }
+    
+    private Color averiguarColorSeleccionado(){
+        if(paredjRadioButton.isSelected()){
+            return ManejadorDePanel.COLOR_PARED;
+        }else if(sinSuperficiejRadioButton.isSelected()){
+            return ManejadorDePanel.COLOR_SIN_SUPERFICIE;
+        }else if(rugosojRadioButton.isSelected()){
+            return ManejadorDePanel.COLOR_RUGOSO;
+        }else if(lisojRadioButton.isSelected()){
+            return ManejadorDePanel.COLOR_LISO;
+        }else{
+            return Color.WHITE;
+        }
+    }
+    
     public void cambiarTextoDeCoordenadas(String texto) {
         this.coordenadasjLabel.setText(texto);
     }

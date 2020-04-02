@@ -139,6 +139,8 @@ public class Movil {
                     //AQUI SE DEBERIAN DE MANDAR LOS MOVIMIENTOS BASE
                     System.out.println("Cadena de movimiento Base giro: "+Movimientos.get(n).CadenaGiro());
                     System.out.println("Cadena de movimiento Base recto : "+Movimientos.get(n).CadenaBase());
+
+                    System.out.println("ESTO ES DEL:"+del);
                 }
                 //ENVIAR X (MUEVE UN PIXEL EN X)
                 if (objetoMovil.getX() != x1) {
@@ -285,8 +287,10 @@ public class Movil {
         if (this.frame.getManPanel().getManMatriz().verificarSiPosicionEsPared(objetoMovil.getX(), objetoMovil.getY())) {
             return 1;
         }
-        //System.out.println("PINTADO:" + this.frame.getManPanel().getManMatriz().buscarEnMatriz(objetoMovil.getX(), objetoMovil.getY()).estaPintado());
-
+        //Se cambia la velocidad si pasa sobre una superficie
+        //Se debe cerificar si pasa sobre una superficie si no que no vuelva a la velocidad que tenia en un principio
+        
+        
         return 0;
     }
 
@@ -311,6 +315,10 @@ public class Movil {
         try {
             /*repintando cuadricula*/
             frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
+            
+            frame.getManPanel().getManMatriz().pintarCuadrosDeMatriz(frame.getManPanel().getG());
+            
+            
 //esta linea hace algo raro            
 //            frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
             Thread.sleep(t);

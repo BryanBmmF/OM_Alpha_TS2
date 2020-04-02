@@ -4,7 +4,9 @@
 package gnz.frontend;
 
 import gnz.analizadores.Lexico;
+import gnz.analizadores.Lexico3;
 import gnz.analizadores.parser1;
+import gnz.analizadores.parser3;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
@@ -81,6 +83,7 @@ public class FrameOM extends javax.swing.JFrame {
     private void initComponents() {
 
         grupoDeBotones = new javax.swing.ButtonGroup();
+        grupoOpciones = new javax.swing.ButtonGroup();
         matrizPanel = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -107,7 +110,6 @@ public class FrameOM extends javax.swing.JFrame {
         lisojRadioButton = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -126,6 +128,8 @@ public class FrameOM extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         userjLabel = new javax.swing.JLabel();
         cerrarSesionjButton = new javax.swing.JButton();
 
@@ -356,14 +360,12 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mapa", jPanel3);
 
         jLabel3.setText("COMANDOS");
-
-        jLabel4.setText("MOVIMIENTO=N, R; ANGULO=GRADOS; DISTANCIA=CENTIMETROS");
 
         jButton3.setText("ABRIR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -446,6 +448,17 @@ public class FrameOM extends javax.swing.JFrame {
             }
         });
 
+        grupoOpciones.add(jRadioButton1);
+        jRadioButton1.setText("Estoy en Movimientos Complejos");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        grupoOpciones.add(jRadioButton2);
+        jRadioButton2.setText("Estoy en Movimientos Base");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -454,16 +467,7 @@ public class FrameOM extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9))
                     .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addGap(41, 41, 41))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -485,21 +489,34 @@ public class FrameOM extends javax.swing.JFrame {
                                 .addComponent(jButton7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jButton3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jRadioButton2))))
+                        .addGap(0, 70, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9)))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(45, 45, 45)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(245, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(2, 2, 2)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
@@ -529,13 +546,6 @@ public class FrameOM extends javax.swing.JFrame {
                     .addComponent(jButton8)
                     .addComponent(jButton9))
                 .addGap(71, 71, 71))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel4)
-                    .addContainerGap(646, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Movimiento Libre", jPanel4);
@@ -565,8 +575,8 @@ public class FrameOM extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(cerrarSesionjButton)))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -685,24 +695,37 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-        if (!jTextArea1.getText().equals("")) {
+        if(jRadioButton1.isSelected()){
+            if (!jTextArea1.getText().equals("")) {
 
-            Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
-            parser1 sin1 = new parser1(lexico);
-            try {
-                sin1.parse();
-            } catch (Exception e) {
-            }
-            movil.limpiar();
-            if (sin1.listavalores != null) {
-                movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
+                parser1 sin1 = new parser1(lexico);
+                try {
+                    sin1.parse();
+                } catch (Exception e) {
+                }
+                movil.limpiar();
+                if (sin1.listavalores != null) {
+                    movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                } else {
+                    JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                }
+                //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
             } else {
-                JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
             }
-            //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
-        } else {
-            JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
+        }else{
+            Lexico3 lexico3=new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
+            parser3 sin3=new parser3(lexico3);
+                try {
+                    sin3.parse();
+                } catch (Exception e) {
+                }
+            this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n"+sin3.cadena);
+            System.out.print(sin3.cadena);
         }
+            
+            
         //}else{
         //  JOptionPane.showMessageDialog(null, "ANTES DE EJECUTAR COLOQUE EL NOMBRE DE SU GRUPO");
         //}
@@ -782,6 +805,10 @@ public class FrameOM extends javax.swing.JFrame {
         new inicioSesionFrame();
     }//GEN-LAST:event_cerrarSesionjButtonActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
     public String guardar(File Archivo, String documento) {
         String mensaje = null;
         try {
@@ -805,6 +832,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JLabel coordenadasjLabel;
     private javax.swing.JLabel equivalenciajLabel;
     private javax.swing.ButtonGroup grupoDeBotones;
+    private javax.swing.ButtonGroup grupoOpciones;
     private javax.swing.JButton guardarComojButton;
     private javax.swing.JButton guardarMapajButton;
     private javax.swing.JButton jButton1;
@@ -820,7 +848,6 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -830,6 +857,8 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

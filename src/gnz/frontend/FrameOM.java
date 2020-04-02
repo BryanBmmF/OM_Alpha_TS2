@@ -4,7 +4,9 @@
 package gnz.frontend;
 
 import gnz.analizadores.Lexico;
+import gnz.analizadores.Lexico3;
 import gnz.analizadores.parser1;
+import gnz.analizadores.parser3;
 import gnz.backend.Matriz.ManejadorMatriz;
 import gnz.backend.Matriz.Run;
 import gnz.backend.archivos.ManejadorDeArchivos;
@@ -79,6 +81,7 @@ public class FrameOM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         grupoDeBotones = new javax.swing.ButtonGroup();
         matrizPanel = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -106,7 +109,6 @@ public class FrameOM extends javax.swing.JFrame {
         lisojRadioButton = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -125,13 +127,15 @@ public class FrameOM extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         userjLabel = new javax.swing.JLabel();
         cerrarSesionjButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         matrizPanel.setBackground(new java.awt.Color(254, 254, 254));
-        matrizPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        matrizPanel.setBorder(new javax.swing.border.SoftBevelBorder(0));
         matrizPanel.setName(""); // NOI18N
         matrizPanel.setPreferredSize(new java.awt.Dimension(601, 601));
         matrizPanel.setRequestFocusEnabled(false);
@@ -362,8 +366,6 @@ public class FrameOM extends javax.swing.JFrame {
 
         jLabel3.setText("COMANDOS");
 
-        jLabel4.setText("MOVIMIENTO=N, R; ANGULO=GRADOS; DISTANCIA=CENTIMETROS");
-
         jButton3.setText("ABRIR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,6 +447,17 @@ public class FrameOM extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Estoy En Movimientos Complejos");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Estoy En Movimientos Base");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -459,12 +472,18 @@ public class FrameOM extends javax.swing.JFrame {
                         .addComponent(jButton9))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)
                         .addGap(41, 41, 41))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButton2))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
@@ -485,7 +504,7 @@ public class FrameOM extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -494,14 +513,20 @@ public class FrameOM extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(245, Short.MAX_VALUE)))
+
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -528,13 +553,6 @@ public class FrameOM extends javax.swing.JFrame {
                     .addComponent(jButton8)
                     .addComponent(jButton9))
                 .addGap(71, 71, 71))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel4)
-                    .addContainerGap(646, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Movimiento Libre", jPanel4);
@@ -684,24 +702,36 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-        if (!jTextArea1.getText().equals("")) {
+        if(jRadioButton1.isSelected()){
+            if (!jTextArea1.getText().equals("")) {
 
-            Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
-            parser1 sin1 = new parser1(lexico);
-            try {
-                sin1.parse();
-            } catch (Exception e) {
-            }
-            movil.limpiar();
-            if (sin1.listavalores != null) {
-                movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
+                parser1 sin1 = new parser1(lexico);
+                try {
+                    sin1.parse();
+                } catch (Exception e) {
+                }
+                movil.limpiar();
+                if (sin1.listavalores != null) {
+                    movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                } else {
+                    JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                }
+                //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
             } else {
-                JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
             }
-            //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
-        } else {
-            JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
+        }else{
+            Lexico3 lexico3=new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
+            parser3 sin3=new parser3(lexico3);
+                try {
+                    sin3.parse();
+                } catch (Exception e) {
+                }
+            System.out.print(sin3.cadena);
         }
+            
+            
         //}else{
         //  JOptionPane.showMessageDialog(null, "ANTES DE EJECUTAR COLOQUE EL NOMBRE DE SU GRUPO");
         //}
@@ -781,6 +811,10 @@ public class FrameOM extends javax.swing.JFrame {
         new inicioSesionFrame();
     }//GEN-LAST:event_cerrarSesionjButtonActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
     public String guardar(File Archivo, String documento) {
         String mensaje = null;
         try {
@@ -798,6 +832,7 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JButton abrirMapaButton;
     private javax.swing.JCheckBox borrarCheckBox;
     private javax.swing.JButton borrarMapajButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cambiarColorButton;
     private javax.swing.JComboBox<String> cambiarCuadriculajComboBox;
     private javax.swing.JButton cerrarSesionjButton;
@@ -819,7 +854,6 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -829,6 +863,8 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

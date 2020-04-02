@@ -58,4 +58,33 @@ public class Movimiento {
         }
         
     }
+    
+    public String CadenaBase(){
+        //LLANTAS HACIA ADELANTE
+        //EJEMPLO DE CADENA DE SALIDA <(a)(100)(3)(1)><(b)(100)(3)(1)><(c)(100)(3)(1)><(c)(100)(3)(1)>
+        //MOTOR (a,b,c,d), (Distancia), (velocidad: 1-10), (sentido 0=sin mover, 1=adelante, 2=atras)
+        String cadena="";
+        if((angulo>=0&&angulo<91)||(angulo>270&&angulo<360)){
+            cadena="<(a)("+distancia+")("+(velocidad*3)+")(1)><(b)("+distancia+")("+(velocidad*3)+")(1)><(c)("+distancia+")("+(velocidad*3)+")(1)><(c)("+distancia+")("+(velocidad*3)+")(1)>";
+        }
+        //LLANTAS HACIA ATRAS
+        else{
+            cadena="<(a)("+distancia+")("+(velocidad*3)+")(2)><(b)("+distancia+")("+(velocidad*3)+")(2)><(c)("+distancia+")("+(velocidad*3)+")(2)><(c)("+distancia+")("+(velocidad*3)+")(2)>";
+        }
+            
+        return cadena;
+    }
+    
+    public String CadenaGiro(){
+        //SI ES ADELANTE O ATRAS NO HAY ANGULO DE GIRO
+        String cadena="";
+        if(angulo!=180&&angulo!=0){
+            
+            
+        }
+        return cadena;
+        
+    }
+    
+    
 }

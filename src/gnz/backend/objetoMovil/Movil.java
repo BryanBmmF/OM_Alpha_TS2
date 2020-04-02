@@ -91,6 +91,7 @@ public class Movil {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String descripcion;
+                
                 if (bandera) {
                     //LIMPIAR VARIABLES Y LLENAR TODAS VARIABLES CON INFORMACION
 
@@ -135,6 +136,10 @@ public class Movil {
                     } else {
                         del = ((t * 2) / 3);
                     }
+                    //AQUI SE DEBERIAN DE MANDAR LOS MOVIMIENTOS BASE
+                    System.out.println("Cadena de movimiento Base giro: "+Movimientos.get(n).CadenaGiro());
+                    System.out.println("Cadena de movimiento Base recto : "+Movimientos.get(n).CadenaBase());
+
                     System.out.println("ESTO ES DEL:"+del);
                 }
                 //ENVIAR X (MUEVE UN PIXEL EN X)

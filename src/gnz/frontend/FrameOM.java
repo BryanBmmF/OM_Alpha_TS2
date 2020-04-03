@@ -217,6 +217,11 @@ public class FrameOM extends javax.swing.JFrame {
         jButton1.setText("Modificar puerto");
 
         jButton2.setText("Log");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         borrarMapajButton.setText("Borrar todo");
         borrarMapajButton.addActionListener(new java.awt.event.ActionListener() {
@@ -517,9 +522,9 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -600,20 +605,20 @@ public class FrameOM extends javax.swing.JFrame {
 
     private void matrizPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseClicked
         this.manArchivos.setMapaEstaGuardado(false);
-        this.manPanel.accionParaClick(evt,averiguarColorSeleccionado());
+        this.manPanel.accionParaClick(evt, averiguarColorSeleccionado());
 //        System.out.println("PRECIONANDO(" + evt.getX() + "," + evt.getY() + ")");
     }//GEN-LAST:event_matrizPanelMouseClicked
 
     private void matrizPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matrizPanelMouseDragged
         this.manArchivos.setMapaEstaGuardado(false);
-        this.manPanel.accionParaMouseDragged(evt,averiguarColorSeleccionado());
+        this.manPanel.accionParaMouseDragged(evt, averiguarColorSeleccionado());
     }//GEN-LAST:event_matrizPanelMouseDragged
 
     private void borrarMapajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarMapajButtonActionPerformed
         this.matrizPanel.setBackground(Color.BLACK);
         this.matrizPanel.setBackground(Color.WHITE);
-        this.manPanel= new ManejadorDePanel(this,Integer.valueOf(String.valueOf(this.cambiarCuadriculajComboBox.getSelectedItem())));
-       
+        this.manPanel = new ManejadorDePanel(this, Integer.valueOf(String.valueOf(this.cambiarCuadriculajComboBox.getSelectedItem())));
+
     }//GEN-LAST:event_borrarMapajButtonActionPerformed
 
     private void nuevoMapajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoMapajButtonActionPerformed
@@ -695,44 +700,46 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-        if(jRadioButton1.isSelected()){
-            if (!jTextArea1.getText().equals("")) {
-
-                Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
-                parser1 sin1 = new parser1(lexico);
-                try {
-                    sin1.parse();
-                } catch (Exception e) {
-                }
-                movil.limpiar();
-                if (sin1.listavalores != null) {
-                    movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Seleccione el tipo de movimiento");
+        } else {
+            if (jRadioButton1.isSelected()) {
+                if (!jTextArea1.getText().equals("")) {
+                    Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
+                    parser1 sin1 = new parser1(lexico);
+                    try {
+                        sin1.parse();
+                    } catch (Exception e) {
+                    }
+                    movil.limpiar();
+                    if (sin1.listavalores != null) {
+                        movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                    }
+                    //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                    JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
                 }
-                //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
             } else {
-                JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
-            }
-        }else{
-            Lexico3 lexico3=new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
-            parser3 sin3=new parser3(lexico3);
+                Lexico3 lexico3 = new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
+                parser3 sin3 = new parser3(lexico3);
                 try {
                     sin3.parse();
                 } catch (Exception e) {
                 }
-            this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n"+sin3.cadena);
-            System.out.print(sin3.cadena);
+                this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n" + sin3.cadena);
+                System.out.print(sin3.cadena);
+            }
+            this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
         }
-            
-            
+
         //}else{
         //  JOptionPane.showMessageDialog(null, "ANTES DE EJECUTAR COLOQUE EL NOMBRE DE SU GRUPO");
         //}
         //}else{
         //  JOptionPane.showMessageDialog(null, "ANTES DE EJECUTAR COLOQUE EL NOMBRE DE SU GRUPO");
         //}
-        this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -809,6 +816,15 @@ public class FrameOM extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (idUsuario == null) {
+            JOptionPane.showMessageDialog(this, "Debe haber iniciado sesion para esta opcion");
+        } else {
+            LogJDialog log = new LogJDialog(this, true);
+            log.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public String guardar(File Archivo, String documento) {
         String mensaje = null;
         try {
@@ -880,7 +896,7 @@ public class FrameOM extends javax.swing.JFrame {
             this.userjLabel.setText("Ingreso como:" + idUsuario);
             try {
                 ManejadorDeSesiones.guardarSesion(idUsuario);
-                idSesion=ManejadorDeSesiones.consultarUltimaSesion();
+                idSesion = ManejadorDeSesiones.consultarUltimaSesion();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -889,27 +905,27 @@ public class FrameOM extends javax.swing.JFrame {
         }
     }
 
-    public void agregarGrupoDeBotones(){
+    public void agregarGrupoDeBotones() {
         grupoDeBotones.add(paredjRadioButton);
         grupoDeBotones.add(sinSuperficiejRadioButton);
         grupoDeBotones.add(rugosojRadioButton);
         grupoDeBotones.add(lisojRadioButton);
     }
-    
-    private Color averiguarColorSeleccionado(){
-        if(paredjRadioButton.isSelected()){
+
+    private Color averiguarColorSeleccionado() {
+        if (paredjRadioButton.isSelected()) {
             return ManejadorDePanel.COLOR_PARED;
-        }else if(sinSuperficiejRadioButton.isSelected()){
+        } else if (sinSuperficiejRadioButton.isSelected()) {
             return ManejadorDePanel.COLOR_SIN_SUPERFICIE;
-        }else if(rugosojRadioButton.isSelected()){
+        } else if (rugosojRadioButton.isSelected()) {
             return ManejadorDePanel.COLOR_RUGOSO;
-        }else if(lisojRadioButton.isSelected()){
+        } else if (lisojRadioButton.isSelected()) {
             return ManejadorDePanel.COLOR_LISO;
-        }else{
+        } else {
             return Color.WHITE;
         }
     }
-    
+
     public void cambiarTextoDeCoordenadas(String texto) {
         this.coordenadasjLabel.setText(texto);
     }
@@ -948,7 +964,7 @@ public class FrameOM extends javax.swing.JFrame {
         return idUsuario;
     }
 
-    public static int getIdSesion(){
+    public static int getIdSesion() {
         return idSesion;
     }
 }

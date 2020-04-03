@@ -74,7 +74,7 @@ public class ManejadorMatriz implements Serializable {
     public Celda buscarEnMatriz(int x, int y) {
         int xM = averiguarEquivalenteEnMatriz(x);
         int yM = averiguarEquivalenteEnMatriz(y);
-        System.out.println("X:" + xM + " Y:" + yM);
+        //System.out.println("X:" + xM + " Y:" + yM);
         if (xM == this.matriz.length) {
             xM--;
         }
@@ -104,7 +104,7 @@ public class ManejadorMatriz implements Serializable {
             int eqx = averiguarEquivalenteEnMatriz(i);
             for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
                 int eqy = averiguarEquivalenteEnMatriz(j);
-                System.out.println("Punto equivalente:(" + eqx + "," + eqy + ")");
+                //System.out.println("Punto equivalente:(" + eqx + "," + eqy + ")");
                 this.matriz[eqx][eqy].setEstaVisitado(true);
 
             }
@@ -129,9 +129,9 @@ public class ManejadorMatriz implements Serializable {
             int eqx = averiguarEquivalenteEnMatriz(i);
             for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
                 int eqy = averiguarEquivalenteEnMatriz(j);
-                System.out.println("Punto equivalente para ver si es pared:(" + eqx + "," + eqy + ")");
+                //System.out.println("Punto equivalente para ver si es pared:(" + eqx + "," + eqy + ")");
                 if (this.matriz[eqx][eqy].estaPintado()) {
-                    System.out.println("DEVOLVEREMOS TRUE JAJAJAJAJAJAJAJAJA");
+                    //System.out.println("DEVOLVEREMOS TRUE JAJAJAJAJAJAJAJAJA");
                     return true;
                 }
             }
@@ -161,4 +161,6 @@ public class ManejadorMatriz implements Serializable {
         this.numeroDeCuadros = numeroDeCuadros;
     }
 
+    
+    
 }

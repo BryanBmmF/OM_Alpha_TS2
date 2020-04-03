@@ -42,7 +42,7 @@ public class Celda implements Serializable {
             this.color = color;
             asignarVelocidad();
             g.setColor(color);
-            System.out.println("ESTA OCUPADO:"+estaVisitado);
+            //System.out.println("ESTA OCUPADO:"+estaVisitado);
             //System.out.println("LimiteSuperiorX:" + limiteSuperiorX);
             //System.out.println("LimiteSuperiorY:" + limiteSuperiorY);
             int comodinX = limiteSuperiorX - (ManejadorMatriz.LONGITUD_PANEL / numeroDeCuadros - 1);
@@ -57,7 +57,7 @@ public class Celda implements Serializable {
     }
 
     public void borrarCelda(Color color, Graphics g, int numeroDeCuadros) {
-            System.out.println("BORRRRRRRRRRRRRRRADO");
+            //System.out.println("BORRRRRRRRRRRRRRRADO");
             this.estaPintado = false;
             g.setColor(color);
             this.color=color;

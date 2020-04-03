@@ -186,6 +186,7 @@ public class Movil {
 
                 //ENVIAR EL RETRASO DE VELOCIDAD DELAY DEL TIEMPO
                 delay(del);
+                frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
 
                 //COMPROBAR SI YA SE FINALIZO EL MOVIMIENTO
                 if (!comprobar()) {
@@ -310,7 +311,8 @@ public class Movil {
     public void delay(int t) {
         try {
             /*repintando cuadricula*/
-            frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
+            //frame.getManPanel().pintarCuadricula(frame.getManPanel().getG());
+            
 //esta linea hace algo raro            
 //            frame.getManPanel().dibujarCuadriculaDeMatriz(frame.getManPanel().getManMatriz(), frame.getMatrizPanel());
             Thread.sleep(t);

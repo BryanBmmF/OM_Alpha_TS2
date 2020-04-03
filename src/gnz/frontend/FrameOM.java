@@ -65,7 +65,9 @@ public class FrameOM extends javax.swing.JFrame {
         actualizarEquivalencia();
         this.manArchivos = new ManejadorDeArchivos(this);
         //Elementos para movimieto libre del objeto movil
-        movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("Imagenes/coche1.png")));
+       
+        movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("Imagenes/coche3.png")));
+        movil.getObjetoMovil().setOpaque(true);
         System.out.println(getClass().getResource(""));
         //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         //movil.getObjetoMovil().setVisible(true);
@@ -138,6 +140,7 @@ public class FrameOM extends javax.swing.JFrame {
         matrizPanel.setBackground(new java.awt.Color(254, 254, 254));
         matrizPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         matrizPanel.setName(""); // NOI18N
+        matrizPanel.setOpaque(false);
         matrizPanel.setPreferredSize(new java.awt.Dimension(601, 601));
         matrizPanel.setRequestFocusEnabled(false);
         matrizPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -161,6 +164,12 @@ public class FrameOM extends javax.swing.JFrame {
             matrizPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 595, Short.MAX_VALUE)
         );
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         coordenadasjLabel.setText("Coordenadas:");
 
@@ -360,7 +369,7 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mapa", jPanel3);
@@ -500,7 +509,7 @@ public class FrameOM extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jRadioButton2))))
-                        .addGap(0, 70, Short.MAX_VALUE))
+                        .addGap(0, 56, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -517,9 +526,9 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -695,7 +704,7 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-        if(jRadioButton1.isSelected()){
+        if(jRadioButton1.isSelected()&&!jRadioButton2.isSelected()){
             if (!jTextArea1.getText().equals("")) {
 
                 Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
@@ -706,6 +715,9 @@ public class FrameOM extends javax.swing.JFrame {
                 }
                 movil.limpiar();
                 if (sin1.listavalores != null) {
+                    
+                    System.out.print(""+manPanel.getManMatriz().getNumeroDeCuadros());
+                    
                     movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
                 } else {
                     JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
@@ -714,7 +726,7 @@ public class FrameOM extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
             }
-        }else{
+        }else if(!jRadioButton1.isSelected()&&jRadioButton2.isSelected()){
             Lexico3 lexico3=new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
             parser3 sin3=new parser3(lexico3);
                 try {
@@ -723,6 +735,8 @@ public class FrameOM extends javax.swing.JFrame {
                 }
             this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n"+sin3.cadena);
             System.out.print(sin3.cadena);
+        }else{
+            JOptionPane.showMessageDialog(null, "ESCOJA UNA OPCION ANTES");
         }
             
             
@@ -750,16 +764,18 @@ public class FrameOM extends javax.swing.JFrame {
             movil.repos(cordenadax, cordenaday, jTextArea2);
             movil.limpiar();
             movil.getObjetoMovil().repaint();
+            this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
             //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");
             //System.out.println("YACTUAL:" + movil.getObjetoMovil().getY());
             /**
              * **********Accion para no pintar sobre el objeto
              * movil***************
              */
+            this.manPanel.pintarCuadricula(this.manPanel.getG());
             this.manPanel.getManMatriz().ocuparDesocuparPosicion(movil.getObjetoMovil().getX(), movil.getObjetoMovil().getY());
-
+            this.manPanel.pintarCuadricula(this.manPanel.getG());
         }
-        this.manPanel.pintarCuadricula(this.manPanel.getG());
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -808,6 +824,23 @@ public class FrameOM extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
+        movil.getObjetoMovil().setVisible(true);
+            movil.repos(0, 0, jTextArea2);
+            movil.limpiar();
+            movil.getObjetoMovil().repaint();
+            //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");
+            //System.out.println("YACTUAL:" + movil.getObjetoMovil().getY());
+            /**
+             * **********Accion para no pintar sobre el objeto
+             * movil***************
+             */
+            this.manPanel.getManMatriz().ocuparDesocuparPosicion(movil.getObjetoMovil().getX(), movil.getObjetoMovil().getY());
+
+        this.manPanel.pintarCuadricula(this.manPanel.getG());
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     public String guardar(File Archivo, String documento) {
         String mensaje = null;

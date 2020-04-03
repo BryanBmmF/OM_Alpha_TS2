@@ -700,34 +700,38 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-        if (jRadioButton1.isSelected()) {
-            if (!jTextArea1.getText().equals("")) {
-
-                Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
-                parser1 sin1 = new parser1(lexico);
+        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Seleccione el tipo de movimiento");
+        } else {
+            if (jRadioButton1.isSelected()) {
+                if (!jTextArea1.getText().equals("")) {
+                    Lexico lexico = new Lexico(new BufferedReader(new StringReader(jTextArea1.getText())));
+                    parser1 sin1 = new parser1(lexico);
+                    try {
+                        sin1.parse();
+                    } catch (Exception e) {
+                    }
+                    movil.limpiar();
+                    if (sin1.listavalores != null) {
+                        movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
+                    }
+                    //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
+                }
+            } else {
+                Lexico3 lexico3 = new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
+                parser3 sin3 = new parser3(lexico3);
                 try {
-                    sin1.parse();
+                    sin3.parse();
                 } catch (Exception e) {
                 }
-                movil.limpiar();
-                if (sin1.listavalores != null) {
-                    movil.enviar(sin1.listavalores, 30, jLabel7, jLabel8, jTextArea2);
-                } else {
-                    JOptionPane.showMessageDialog(null, "EXISTEN ERRORES EN SU ARCHIVO INTENTE DE NUEVO");
-                }
-                //jTextArea2.setText(sin1.csv.movimientos(objeto.objetoMovil.getX(), objeto.objetoMovil.getY()));
-            } else {
-                JOptionPane.showMessageDialog(null, "PRIMERO ESCRIBA ALGUN COMANDO");
+                this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n" + sin3.cadena);
+                System.out.print(sin3.cadena);
             }
-        } else {
-            Lexico3 lexico3 = new Lexico3(new BufferedReader(new StringReader(jTextArea1.getText())));
-            parser3 sin3 = new parser3(lexico3);
-            try {
-                sin3.parse();
-            } catch (Exception e) {
-            }
-            this.jTextArea2.append("\n --------------SE ENVIO AL OM LA SIGUIENTE INSTRUCCION:---------------\n" + sin3.cadena);
-            System.out.print(sin3.cadena);
+            this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
         }
 
         //}else{
@@ -736,7 +740,6 @@ public class FrameOM extends javax.swing.JFrame {
         //}else{
         //  JOptionPane.showMessageDialog(null, "ANTES DE EJECUTAR COLOQUE EL NOMBRE DE SU GRUPO");
         //}
-        this.manPanel.dibujarCuadriculaDeMatriz(this.manPanel.getManMatriz(), matrizPanel);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 

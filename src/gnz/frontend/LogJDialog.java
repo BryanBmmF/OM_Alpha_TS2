@@ -37,6 +37,7 @@ public class LogJDialog extends javax.swing.JDialog {
         sesiones = ObservableCollections.observableList(listaSesiones);
         sesionSeleccionada = new Sesion();
         initComponents();
+        setLocationRelativeTo(null);
         verSesiones();
     }
 
@@ -63,13 +64,21 @@ public class LogJDialog extends javax.swing.JDialog {
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${sesiones}");
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fecha}"));
-        columnBinding.setColumnName("Fecha de sesion");
+        columnBinding.setColumnName("Fecha");
         columnBinding.setColumnClass(java.sql.Timestamp.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${hora}"));
+        columnBinding.setColumnName("Hora");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${sesionSeleccionada}"), jTable1, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
         bindingGroup.addBinding(binding);
 
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jLabel1.setText("Sesiones");
 
@@ -134,11 +143,15 @@ public class LogJDialog extends javax.swing.JDialog {
         } else {
             try {
                 List<String> acciones = ManejadorDeAcciones.consultarAcciones(sesionSeleccionada.getIdSesion());
-                this.accionesjEditorPane.setText("Mostrando Actividades...\n\n\n");
-                for (String accion : acciones) {
-                    this.accionesjEditorPane.setText(this.accionesjEditorPane.getText() + accion);
-                    this.accionesjEditorPane.setText(this.accionesjEditorPane.getText()+"\n\n"
-                            + "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" + "\n\n\n");
+                if (acciones.isEmpty()) {
+                    this.accionesjEditorPane.setText("No se realizaron acciones en la sesion...\n\n\n");
+                } else {
+                    this.accionesjEditorPane.setText("Mostrando Actividades...\n\n\n");
+                    for (String accion : acciones) {
+                        this.accionesjEditorPane.setText(this.accionesjEditorPane.getText() + accion);
+                        this.accionesjEditorPane.setText(this.accionesjEditorPane.getText() + "\n\n"
+                                + "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" + "\n\n\n");
+                    }
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();

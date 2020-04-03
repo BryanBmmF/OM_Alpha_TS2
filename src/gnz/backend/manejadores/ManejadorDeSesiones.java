@@ -6,10 +6,13 @@
 package gnz.backend.manejadores;
 
 import gnz.backend.conexion.Conexion;
+import gnz.frontend.FrameOM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,5 +37,17 @@ public class ManejadorDeSesiones {
         }
         return 0;
     }
+    
+        public static List<Sesion> buscarSesiones() throws SQLException{
+        List<Sesion> sesiones  = new ArrayList<>();
+        String consulta="SELECT Id_Sesion,Fecha FROM SESION WHERE USUARIO_User=?";
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(consulta);
+        sentencia.setString(1,FrameOM.getIdUsuario());
+        ResultSet rs= sentencia.executeQuery();
+        while(rs.next()){
+            sesiones.add(new Sesion(rs.getInt(1), rs.getTimestamp(2),FrameOM.getIdUsuario()));
+        }
+        return sesiones;
+    } 
 
 }

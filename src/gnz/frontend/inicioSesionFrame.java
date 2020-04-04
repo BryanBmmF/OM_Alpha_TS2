@@ -22,7 +22,9 @@ public class inicioSesionFrame extends javax.swing.JFrame {
     public inicioSesionFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
         this.setTitle("OM Inicio de sesion");
+        
         this.setVisible(true);
     }
 

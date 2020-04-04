@@ -25,8 +25,8 @@ public class Conexion {
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/LOG_OM";
 
-        user = "jes";
-        password = "7321";
+        user = "root";
+        password = "bryan1234";
 
         try {
             Class.forName(driver);

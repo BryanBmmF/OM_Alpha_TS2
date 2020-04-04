@@ -32,13 +32,16 @@ public class LogJDialog extends javax.swing.JDialog {
      * Creates new form LogJDialog
      */
     public LogJDialog(java.awt.Frame parent, boolean modal) {
+        
         super(parent, modal);
+        
         listaSesiones = new ArrayList<>();
         sesiones = ObservableCollections.observableList(listaSesiones);
         sesionSeleccionada = new Sesion();
-        initComponents();
+        
         setLocationRelativeTo(null);
         verSesiones();
+        initComponents();
     }
 
     /**

@@ -27,6 +27,7 @@ public class RegistroUsuarioJFrame extends javax.swing.JFrame {
         this.setTitle("OM Registro usuarios");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
     }
 
     /**

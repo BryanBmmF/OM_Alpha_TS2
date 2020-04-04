@@ -53,13 +53,15 @@ public class FrameOM extends javax.swing.JFrame {
      * @param user
      */
     public FrameOM(String user) {
+        initComponents();
         this.movil = new Movil(this);
         idUsuario = user;
-        initComponents();
+        
         colocarUsuario();
         this.setVisible(true);
         setLocationRelativeTo(null);
         setTitle("Objeto Movil");
+        
         //Elementos para creacion de mapa
         this.manPanel = new ManejadorDePanel(this, 50);
         actualizarEquivalencia();
@@ -73,6 +75,7 @@ public class FrameOM extends javax.swing.JFrame {
         //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
         agregarGrupoDeBotones();
+       
     }
 
     /**
@@ -821,7 +824,13 @@ public class FrameOM extends javax.swing.JFrame {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         movil.getObjetoMovil().setVisible(true);
-            movil.repos(0, 0, jTextArea2);
+        
+        if (movil.getObjetoMovil().getX()==0) {
+            //movil.repos(0, 0, jTextArea2);
+            movil.getObjetoMovil().setLocation(0, 0);
+            
+        }
+            
             movil.limpiar();
             movil.getObjetoMovil().repaint();
             //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");

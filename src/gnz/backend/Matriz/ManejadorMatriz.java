@@ -54,11 +54,11 @@ public class ManejadorMatriz implements Serializable {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
                 Celda celda = matriz[i][j];
-                if (celda.estaPintado() || celda.getVelocidadDeAuto()>ManejadorDePanel.VELOCIDAD_SIN_SUPERFICIE) {
+                if (celda.estaPintado() || celda.getVelocidadDeAuto() > ManejadorDePanel.VELOCIDAD_SIN_SUPERFICIE) {
                     celda.pintarCelda(celda.getColor(), g, numeroDeCuadros);
                     //System.out.println("Pintada:" + i + "," + j);
                 } else {
-                    celda.borrarCelda(Color.WHITE, g, numeroDeCuadros);
+                    celda.borrarCelda(ManejadorDePanel.COLOR_SIN_SUPERFICIE, g, numeroDeCuadros);
                 }
             }
         }
@@ -68,6 +68,9 @@ public class ManejadorMatriz implements Serializable {
         int posEnMatriz;
         int relacion = LONGITUD_PANEL / numeroDeCuadros;
         posEnMatriz = (numero / relacion);
+        if (posEnMatriz > (matriz.length - 1)) {
+            return -1;
+        }
         return posEnMatriz;
     }
 
@@ -75,6 +78,9 @@ public class ManejadorMatriz implements Serializable {
         int xM = averiguarEquivalenteEnMatriz(x);
         int yM = averiguarEquivalenteEnMatriz(y);
         //System.out.println("X:" + xM + " Y:" + yM);
+        if (xM == -1 || yM == -1) {
+            return null;
+        }
         if (xM == this.matriz.length) {
             xM--;
         }
@@ -86,10 +92,15 @@ public class ManejadorMatriz implements Serializable {
     }
 
     public void pintarPared(int x, int y, Graphics g, Color color) {
+        Celda celda = buscarEnMatriz(x, y);
         if (color == ManejadorDePanel.COLOR_SIN_SUPERFICIE) {
-            buscarEnMatriz(x, y).borrarCelda(Color.WHITE, g, numeroDeCuadros);
+            if (celda != null) {
+                buscarEnMatriz(x, y).borrarCelda(ManejadorDePanel.COLOR_SIN_SUPERFICIE, g, numeroDeCuadros);
+            }
         } else {
-            buscarEnMatriz(x, y).pintarCelda(color, g, numeroDeCuadros);
+            if (celda != null) {
+                buscarEnMatriz(x, y).pintarCelda(color, g, numeroDeCuadros);
+            }
         }
     }
 
@@ -105,8 +116,9 @@ public class ManejadorMatriz implements Serializable {
             for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
                 int eqy = averiguarEquivalenteEnMatriz(j);
                 //System.out.println("Punto equivalente:(" + eqx + "," + eqy + ")");
-                this.matriz[eqx][eqy].setEstaVisitado(true);
-
+                if (eqx != -1 && eqy != -1) {
+                    this.matriz[eqx][eqy].setEstaVisitado(true);
+                }
             }
         }
         //System.out.println("Inicio:(" + x + "," + y + ") Fin:(" + posFinalAuto_X + "," + posFinalAuto_Y + ")");
@@ -130,6 +142,11 @@ public class ManejadorMatriz implements Serializable {
             for (int j = y; j < posFinalAuto_Y; j += longitudDeCuadro) {
                 int eqy = averiguarEquivalenteEnMatriz(j);
                 //System.out.println("Punto equivalente para ver si es pared:(" + eqx + "," + eqy + ")");
+                if ((eqx > matriz.length - 1) || (eqy > matriz.length - 1)) {
+                    return true;
+                } else if (eqx == -1 || eqy == -1) {
+                    return true;
+                }
                 if (this.matriz[eqx][eqy].estaPintado()) {
                     //System.out.println("DEVOLVEREMOS TRUE JAJAJAJAJAJAJAJAJA");
                     return true;
@@ -161,6 +178,4 @@ public class ManejadorMatriz implements Serializable {
         this.numeroDeCuadros = numeroDeCuadros;
     }
 
-    
-    
 }

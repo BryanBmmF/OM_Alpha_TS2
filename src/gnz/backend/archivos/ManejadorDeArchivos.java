@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class ManejadorDeArchivos {
         this.rutaDeArchivo = null;
         this.laberintoFrame = laberinto;
     }
-
+    
     public boolean verificarGuardadoYSeguimientoDeAccion(ManejadorMatriz manMatriz) throws Exception {
         if (mapaEstaGuardado) {
             JOptionPane.showMessageDialog(this.laberintoFrame, "El mapa ya ha sido guardado");
@@ -66,7 +67,7 @@ public class ManejadorDeArchivos {
     }
 
     public File guardarMapaComo(ManejadorMatriz manMatriz) throws Exception {
-        mapaEstaGuardado=true;
+        mapaEstaGuardado = true;
         JFileChooser guardar = new JFileChooser();
         guardar.showSaveDialog(laberintoFrame);
         guardar.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -86,7 +87,7 @@ public class ManejadorDeArchivos {
             abrir.showOpenDialog(this.laberintoFrame);
             abrir.setFileSelectionMode(JFileChooser.FILES_ONLY);
             File ruta = abrir.getSelectedFile();
-            System.out.println("Ruta:"+ruta);
+            //System.out.println("Ruta:" + ruta);
             FileInputStream fichero;
             fichero = new FileInputStream(ruta);
             ObjectInputStream tuberia = new ObjectInputStream(fichero);
@@ -97,15 +98,15 @@ public class ManejadorDeArchivos {
 
     }
 
-        public void crearNuevoMapa(ManejadorMatriz manMatriz,JPanel panel) throws Exception{
-        if(verificarGuardadoYSeguimientoDeAccion(manMatriz)){
+    public void crearNuevoMapa(ManejadorMatriz manMatriz, JPanel panel) throws Exception {
+        if (verificarGuardadoYSeguimientoDeAccion(manMatriz)) {
             panel.setBackground(Color.GRAY);
             panel.setBackground(Color.WHITE);
         }
     }
 
     private void guardarMapa(ManejadorMatriz manMatriz) throws Exception {
-        mapaEstaGuardado=true;
+        mapaEstaGuardado = true;
         FileOutputStream fichero;
         fichero = new FileOutputStream(rutaDeArchivo);
         ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
@@ -116,31 +117,29 @@ public class ManejadorDeArchivos {
     public void setMapaEstaGuardado(boolean mapaEstaGuardado) {
         this.mapaEstaGuardado = mapaEstaGuardado;
     }
-    
-    
+
     /*Lectura y escritura basica de archivos de texto*/
-    
-    public String leer(String cadena){
-        String texto="";
+    public String leer(String cadena) {
+        String texto = "";
         try {
-            BufferedReader bf= new BufferedReader(new FileReader(cadena));
-            String temp="";
+            BufferedReader bf = new BufferedReader(new FileReader(cadena));
+            String temp = "";
             String bfReader;
-            while ((bfReader=bf.readLine())!=null) {
-                temp=temp+bfReader+"\n";
+            while ((bfReader = bf.readLine()) != null) {
+                temp = temp + bfReader + "\n";
             }
-            texto=temp;
+            texto = temp;
         } catch (Exception e) {
         }
         return texto;
     }
-    
-    public File Abrir(){
-        JFileChooser chooser=new JFileChooser();
+
+    public File Abrir() {
+        JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("obmo", "OBMO");
         chooser.setFileFilter(filter);
         chooser.showOpenDialog(null);
-        File f=chooser.getSelectedFile();
+        File f = chooser.getSelectedFile();
         return f;
     }
 

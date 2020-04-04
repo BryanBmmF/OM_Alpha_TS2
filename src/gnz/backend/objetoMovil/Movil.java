@@ -290,7 +290,7 @@ public class Movil {
 
         return 0;
     }
-
+    
     //METODO DE LIMPIAR VARIABLES
     public void limpiar() {
         Movimientos = null;

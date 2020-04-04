@@ -20,7 +20,7 @@ public class ManejadorDePanel {
     //Colores disponibles
     public static Color COLOR_LISO = Color.GREEN;
     public static Color COLOR_RUGOSO = Color.DARK_GRAY;
-    public static Color COLOR_SIN_SUPERFICIE = Color.WHITE;
+    public static Color COLOR_SIN_SUPERFICIE = new Color(encontrarHexadecimal("EEEEEE"));
     public static Color COLOR_PARED = Color.BLACK;
 
     //Velocidades segun los colores
@@ -81,6 +81,10 @@ public class ManejadorDePanel {
         this.frame.cambiarTextoDeCoordenadas(texto);
         pintarCuadricula(g);
 
+    }
+    
+    private static int encontrarHexadecimal(String color){
+        return Integer.parseInt(color, 16);
     }
 
     public int getNumeroDeCuadros() {

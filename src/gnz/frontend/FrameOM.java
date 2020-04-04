@@ -141,6 +141,28 @@ public class FrameOM extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         userjLabel = new javax.swing.JLabel();
         cerrarSesionjButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OM_V1.0");
@@ -167,7 +189,7 @@ public class FrameOM extends javax.swing.JFrame {
         matrizPanel.setLayout(matrizPanelLayout);
         matrizPanelLayout.setHorizontalGroup(
             matrizPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
+            .addGap(0, 594, Short.MAX_VALUE)
         );
         matrizPanelLayout.setVerticalGroup(
             matrizPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,7 +561,7 @@ public class FrameOM extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jRadioButton2))))
-                        .addGap(0, 52, Short.MAX_VALUE))
+                        .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -598,6 +620,127 @@ public class FrameOM extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setLayout(new java.awt.GridLayout(1, 20, 0, 10));
+
+        jLabel4.setBackground(new java.awt.Color(15, 159, 230));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("20");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel4.setOpaque(true);
+        jPanel5.add(jLabel4);
+
+        jLabel11.setBackground(new java.awt.Color(243, 55, 1));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("40");
+        jLabel11.setOpaque(true);
+        jPanel5.add(jLabel11);
+
+        jLabel15.setBackground(new java.awt.Color(15, 159, 230));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("60");
+        jLabel15.setOpaque(true);
+        jPanel5.add(jLabel15);
+
+        jLabel16.setBackground(new java.awt.Color(243, 55, 1));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("80");
+        jLabel16.setOpaque(true);
+        jPanel5.add(jLabel16);
+
+        jLabel18.setBackground(new java.awt.Color(15, 159, 230));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("100");
+        jLabel18.setOpaque(true);
+        jPanel5.add(jLabel18);
+
+        jLabel19.setBackground(new java.awt.Color(243, 55, 1));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("120");
+        jLabel19.setOpaque(true);
+        jPanel5.add(jLabel19);
+
+        jLabel17.setBackground(new java.awt.Color(15, 159, 230));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("140");
+        jLabel17.setOpaque(true);
+        jPanel5.add(jLabel17);
+
+        jLabel12.setBackground(new java.awt.Color(243, 55, 1));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("160");
+        jLabel12.setOpaque(true);
+        jPanel5.add(jLabel12);
+
+        jLabel13.setBackground(new java.awt.Color(15, 159, 230));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("180");
+        jLabel13.setOpaque(true);
+        jPanel5.add(jLabel13);
+
+        jLabel14.setBackground(new java.awt.Color(243, 55, 1));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("200");
+        jLabel14.setOpaque(true);
+        jPanel5.add(jLabel14);
+
+        jPanel6.setLayout(new java.awt.GridLayout(10, 1));
+
+        jLabel20.setBackground(new java.awt.Color(2, 208, 52));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("20");
+        jLabel20.setOpaque(true);
+        jPanel6.add(jLabel20);
+
+        jLabel24.setBackground(new java.awt.Color(146, 242, 11));
+        jLabel24.setText("40");
+        jLabel24.setOpaque(true);
+        jPanel6.add(jLabel24);
+
+        jLabel21.setBackground(new java.awt.Color(2, 208, 52));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("60");
+        jLabel21.setOpaque(true);
+        jPanel6.add(jLabel21);
+
+        jLabel23.setBackground(new java.awt.Color(146, 242, 11));
+        jLabel23.setText("80");
+        jLabel23.setOpaque(true);
+        jPanel6.add(jLabel23);
+
+        jLabel26.setBackground(new java.awt.Color(2, 208, 52));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("100");
+        jLabel26.setOpaque(true);
+        jPanel6.add(jLabel26);
+
+        jLabel27.setBackground(new java.awt.Color(146, 242, 11));
+        jLabel27.setText("120");
+        jLabel27.setOpaque(true);
+        jPanel6.add(jLabel27);
+
+        jLabel25.setBackground(new java.awt.Color(2, 208, 52));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("140");
+        jLabel25.setOpaque(true);
+        jPanel6.add(jLabel25);
+
+        jLabel28.setBackground(new java.awt.Color(146, 242, 11));
+        jLabel28.setText("160");
+        jLabel28.setOpaque(true);
+        jPanel6.add(jLabel28);
+
+        jLabel29.setBackground(new java.awt.Color(2, 208, 52));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("180");
+        jLabel29.setOpaque(true);
+        jPanel6.add(jLabel29);
+
+        jLabel22.setBackground(new java.awt.Color(146, 242, 11));
+        jLabel22.setText("200");
+        jLabel22.setOpaque(true);
+        jPanel6.add(jLabel22);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -605,30 +748,37 @@ public class FrameOM extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(userjLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cerrarSesionjButton)
+                        .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(userjLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cerrarSesionjButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(matrizPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, Short.MAX_VALUE)))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(userjLabel)
-                .addGap(18, 18, 18)
-                .addComponent(cerrarSesionjButton)
-                .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cerrarSesionjButton)
+                            .addComponent(userjLabel)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -936,7 +1086,26 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -948,6 +1117,8 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;

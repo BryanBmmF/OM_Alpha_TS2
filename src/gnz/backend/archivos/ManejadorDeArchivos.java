@@ -97,6 +97,18 @@ public class ManejadorDeArchivos {
         }
 
     }
+    
+    public void abrirMapaPorDefecto(JPanel panel, ManejadorMatriz manMatriz, String dificultad) throws Exception {
+        if (verificarGuardadoYSeguimientoDeAccion(manMatriz)) {
+            File ruta = new File("src/MapasOM/"+dificultad);
+            FileInputStream fichero;
+            fichero = new FileInputStream(ruta);
+            ObjectInputStream tuberia = new ObjectInputStream(fichero);
+            this.laberintoFrame.getManPanel().dibujarCuadriculaDeMatriz((ManejadorMatriz) tuberia.readObject(), panel);
+            JOptionPane.showMessageDialog(null, "Matriz ejecutada");
+        }
+
+    }
 
     public void crearNuevoMapa(ManejadorMatriz manMatriz, JPanel panel) throws Exception {
         if (verificarGuardadoYSeguimientoDeAccion(manMatriz)) {

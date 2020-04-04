@@ -24,8 +24,10 @@ public class Conexion {
     private Conexion() {
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/LOG_OM";
-        user = "root";
-        password = "mesi";
+
+        user = "jes";
+        password = "7321";
+
         try {
             Class.forName(driver);
             conexion = DriverManager.getConnection(url, user, password);

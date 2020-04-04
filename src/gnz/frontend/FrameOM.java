@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.StringReader;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -67,13 +68,14 @@ public class FrameOM extends javax.swing.JFrame {
         actualizarEquivalencia();
         this.manArchivos = new ManejadorDeArchivos(this);
         //Elementos para movimieto libre del objeto movil
-       
+
         movil.getObjetoMovil().setIcon(new ImageIcon(getClass().getResource("Imagenes/coche3.png")));
         movil.getObjetoMovil().setOpaque(true);
         System.out.println(getClass().getResource(""));
         //movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         //movil.getObjetoMovil().setVisible(true);
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
+        matrizPanel.setOpaque(false);
         agregarGrupoDeBotones();
        
     }
@@ -93,17 +95,14 @@ public class FrameOM extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         coordenadasjLabel = new javax.swing.JLabel();
-        borrarCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         cambiarCuadriculajComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         equivalenciajLabel = new javax.swing.JLabel();
-        cambiarColorButton = new javax.swing.JButton();
         guardarMapajButton = new javax.swing.JButton();
         abrirMapaButton = new javax.swing.JButton();
         guardarComojButton = new javax.swing.JButton();
         nuevoMapajButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         borrarMapajButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -176,8 +175,6 @@ public class FrameOM extends javax.swing.JFrame {
 
         coordenadasjLabel.setText("Coordenadas:");
 
-        borrarCheckBox.setText("Borrar al mantener presionado");
-
         jLabel1.setText("Cambio de cuadricula");
 
         cambiarCuadriculajComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "30", "50", "100", "150", "200" }));
@@ -190,13 +187,6 @@ public class FrameOM extends javax.swing.JFrame {
         jLabel2.setText("Equivalencia:");
 
         equivalenciajLabel.setText("cm");
-
-        cambiarColorButton.setText("Cambiar color");
-        cambiarColorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiarColorButtonActionPerformed(evt);
-            }
-        });
 
         guardarMapajButton.setText("Guardar mapa");
         guardarMapajButton.addActionListener(new java.awt.event.ActionListener() {
@@ -225,8 +215,6 @@ public class FrameOM extends javax.swing.JFrame {
                 nuevoMapajButtonActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Modificar puerto");
 
         jButton2.setText("Log");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -318,22 +306,18 @@ public class FrameOM extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cambiarCuadriculajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(borrarCheckBox)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(equivalenciajLabel)))
                         .addGap(62, 62, 62)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(guardarComojButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(abrirMapaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cambiarColorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(borrarMapajButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(guardarComojButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(abrirMapaButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(borrarMapajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nuevoMapajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(guardarMapajButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -346,26 +330,24 @@ public class FrameOM extends javax.swing.JFrame {
                 .addComponent(coordenadasjLabel)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(borrarCheckBox)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(cambiarCuadriculajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(equivalenciajLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrarMapajButton)
-                    .addComponent(cambiarColorButton))
-                .addGap(18, 18, 18)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(abrirMapaButton)
                     .addComponent(nuevoMapajButton))
@@ -373,11 +355,7 @@ public class FrameOM extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarComojButton)
                     .addComponent(guardarMapajButton))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mapa", jPanel3);
@@ -405,6 +383,8 @@ public class FrameOM extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+
+        jTextField1.setText("0");
 
         jTextField2.setText("0");
 
@@ -510,7 +490,7 @@ public class FrameOM extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jRadioButton2))))
-                        .addGap(0, 56, Short.MAX_VALUE))
+                        .addGap(0, 52, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -584,25 +564,22 @@ public class FrameOM extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(cerrarSesionjButton)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(userjLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(cerrarSesionjButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(matrizPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(userjLabel)
+                .addGap(18, 18, 18)
+                .addComponent(cerrarSesionjButton)
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -662,13 +639,6 @@ public class FrameOM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardarMapajButtonActionPerformed
 
-    private void cambiarColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorButtonActionPerformed
-        //JColorChooser colorChooser = new JColorChooser();
-        //Color color = colorChooser.showDialog(null, "Seleccione un color", this.manPanel.getColor());
-        //this.manPanel.setColor(color);
-        JOptionPane.showMessageDialog(this, "Esta opcion no esta disponible");
-    }//GEN-LAST:event_cambiarColorButtonActionPerformed
-
     private void cambiarCuadriculajComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarCuadriculajComboBoxActionPerformed
         int opcion = JOptionPane.showConfirmDialog(this, "Se borrara el mapa actual");
         System.out.println("OPCION:" + opcion);
@@ -705,7 +675,6 @@ public class FrameOM extends javax.swing.JFrame {
         //if(grupo!=null){
         //  if(!grupo.equals("")){
         //jTextArea2.append("--------------------------NOMBRE DEL GRUPO: "+grupo+"--------------------------\n");
-
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
             JOptionPane.showMessageDialog(this, "Seleccione el tipo de movimiento");
         } else {
@@ -770,7 +739,7 @@ public class FrameOM extends javax.swing.JFrame {
             this.manPanel.getManMatriz().ocuparDesocuparPosicion(movil.getObjetoMovil().getX(), movil.getObjetoMovil().getY());
             this.manPanel.pintarCuadricula(this.manPanel.getG());
         }
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -824,13 +793,11 @@ public class FrameOM extends javax.swing.JFrame {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         movil.getObjetoMovil().setSize((26 * Run.MULT), (16 * Run.MULT));
         movil.getObjetoMovil().setVisible(true);
-        
+
         if (movil.getObjetoMovil().getX()==0) {
             //movil.repos(0, 0, jTextArea2);
             movil.getObjetoMovil().setLocation(0, 0);
-            
         }
-            
             movil.limpiar();
             movil.getObjetoMovil().repaint();
             //System.out.print("XACTUAL:" + movil.getObjetoMovil().getX() + " ");
@@ -868,9 +835,7 @@ public class FrameOM extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirMapaButton;
-    private javax.swing.JCheckBox borrarCheckBox;
     private javax.swing.JButton borrarMapajButton;
-    private javax.swing.JButton cambiarColorButton;
     private javax.swing.JComboBox<String> cambiarCuadriculajComboBox;
     private javax.swing.JButton cerrarSesionjButton;
     private javax.swing.JLabel coordenadasjLabel;
@@ -879,7 +844,6 @@ public class FrameOM extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoOpciones;
     private javax.swing.JButton guardarComojButton;
     private javax.swing.JButton guardarMapajButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -956,10 +920,6 @@ public class FrameOM extends javax.swing.JFrame {
 
     public void cambiarTextoDeCoordenadas(String texto) {
         this.coordenadasjLabel.setText(texto);
-    }
-
-    public boolean seDebeBorrarAlMantenerPresionado() {
-        return borrarCheckBox.isSelected();
     }
 
     public void actualizarEquivalencia() {

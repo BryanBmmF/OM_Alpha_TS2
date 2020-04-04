@@ -7,6 +7,7 @@ package gnz.frontend;
 
 import gnz.backend.manejadores.ManejadorDeSesiones;
 import gnz.backend.manejadores.ManejadorDeUsuarios;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author jesfrin
  */
 public class inicioSesionFrame extends javax.swing.JFrame {
-
+    protected static final String ICON_URL = "/gnz/frontend/Imagenes/coche3.png";
     /**
      * Creates new form inicioSesionFrame
      */
@@ -48,6 +49,8 @@ public class inicioSesionFrame extends javax.swing.JFrame {
         entrarSinSesionjButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Inicio de Sesion OM v1.0");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ICON_URL)));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -88,7 +91,7 @@ public class inicioSesionFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
-                    .addComponent(userjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(userjTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addGap(57, 57, 57)))
         );
 

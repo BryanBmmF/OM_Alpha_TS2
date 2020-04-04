@@ -8,6 +8,7 @@ package gnz.frontend;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import gnz.backend.manejadores.ManejadorDeSesiones;
 import gnz.backend.manejadores.ManejadorDeUsuarios;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author jesfrin
  */
 public class RegistroUsuarioJFrame extends javax.swing.JFrame {
-
+    protected static final String ICON_URL = "/gnz/frontend/Imagenes/coche3.png";
     /**
      * Creates new form RegistroUsuarioJFrame
      */
@@ -49,6 +50,8 @@ public class RegistroUsuarioJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro de Usuarios OM v 1.0");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ICON_URL)));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 

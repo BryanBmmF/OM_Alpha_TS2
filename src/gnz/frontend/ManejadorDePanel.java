@@ -126,9 +126,8 @@ public class ManejadorDePanel {
             }
             this.frame.getMovil().delay(1000);
         }
-                                   
         
-        
+        this.frame.limpiarPanel();     
     
     }
     

@@ -26,7 +26,7 @@ public class Conexion {
         url = "jdbc:mysql://localhost:3306/LOG_OM";
 
         user = "root";
-        password = "mesi";
+        password = "bryan1234";
 
         try {
             Class.forName(driver);

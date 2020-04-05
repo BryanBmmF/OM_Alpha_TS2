@@ -3,6 +3,8 @@
  */
 package gnz.backend.objetoMovil;
 
+import gnz.backend.Matriz.Run;
+
 /**
  *
  * @author Jonathan
@@ -57,6 +59,13 @@ public class Movimiento {
                 break;
         }
         
+    }
+    
+    //instanciar un movimiento Curvo
+    public Movimiento(String tipo, String angulo, String velocidad) {
+        this.tipo = Integer.parseInt(tipo);
+        this.angulo = Integer.parseInt(angulo)*Run.MULT;
+        this.velocidad = Integer.parseInt(velocidad);
     }
     
     public String CadenaBase(){

@@ -78,6 +78,9 @@ public class FrameOM extends javax.swing.JFrame {
         this.matrizPanel.add(movil.getObjetoMovil(), 0, 0);
         matrizPanel.setOpaque(false);
         agregarGrupoDeBotones();
+        
+        /*cargando */
+        cargando();
        
     }
 
@@ -1060,6 +1063,9 @@ public class FrameOM extends javax.swing.JFrame {
         }
         return mensaje;
     }
+    public void cargando(){
+        this.manPanel.cargando(averiguarColorSeleccionado(), this.manArchivos);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1168,7 +1174,7 @@ public class FrameOM extends javax.swing.JFrame {
         } else if (lisojRadioButton.isSelected()) {
             return ManejadorDePanel.COLOR_LISO;
         } else {
-            return Color.WHITE;
+            return ManejadorDePanel.COLOR_SIN_SUPERFICIE;
         }
     }
 
@@ -1209,4 +1215,5 @@ public class FrameOM extends javax.swing.JFrame {
     public static int getIdSesion() {
         return idSesion;
     }
+    
 }

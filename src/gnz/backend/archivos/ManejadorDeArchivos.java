@@ -109,6 +109,15 @@ public class ManejadorDeArchivos {
         }
 
     }
+    
+    public void abrirPalabraPorDefecto(JPanel panel, ManejadorMatriz manMatriz, String dificultad) throws Exception {
+            File ruta = new File("src/MapasOM/"+dificultad);
+            FileInputStream fichero;
+            fichero = new FileInputStream(ruta);
+            ObjectInputStream tuberia = new ObjectInputStream(fichero);
+            this.laberintoFrame.getManPanel().dibujarCuadriculaDeMatriz((ManejadorMatriz) tuberia.readObject(), panel);
+
+    }
 
     public void crearNuevoMapa(ManejadorMatriz manMatriz, JPanel panel) throws Exception {
         if (verificarGuardadoYSeguimientoDeAccion(manMatriz)) {

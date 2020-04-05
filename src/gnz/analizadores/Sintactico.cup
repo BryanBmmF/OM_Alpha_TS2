@@ -34,7 +34,7 @@ parser code
 
 
 terminal String com, Para, Parc;
-terminal String RIni, RFin, RTra, RMre, RMdi, RAde, RAtr, RArr, RAba, Rcm, RGra;
+terminal String RIni, RFin, RTra, RMre, RMdi, RMcu, RAde, RAtr, RArr, RAba, Rcm, RGra;
 terminal String numerico;
 
 non terminal S;
@@ -65,6 +65,22 @@ VALOR::=RMre Para numerico:a Rcm com numerico:b com DIRECCION:c Parc{:
     :}
     |RMdi Para numerico:a Rcm com numerico:b com numerico:c RGra Parc{:
         Movimiento mov=new Movimiento("4", a, b, c);
+        RESULT=mov;
+    :}
+    |RMcu Para numerico:a Rcm com numerico:b com RAde com RArr Parc{:
+        Movimiento mov=new Movimiento("10", a, b);
+        RESULT=mov;
+    :}
+    |RMcu Para numerico:a Rcm com numerico:b com RAde com RAba Parc{:
+        Movimiento mov=new Movimiento("11", a, b);
+        RESULT=mov;
+    :}
+    |RMcu Para numerico:a Rcm com numerico:b com RAtr com RArr Parc{:
+        Movimiento mov=new Movimiento("13", a, b);
+        RESULT=mov;
+    :}
+    |RMcu Para numerico:a Rcm com numerico:b com RAtr com RAba Parc{:
+        Movimiento mov=new Movimiento("12", a, b);
         RESULT=mov;
     :};
 

@@ -4,6 +4,8 @@
 package gnz.frontend;
 
 import gnz.backend.Matriz.ManejadorMatriz;
+import gnz.backend.archivos.ManejadorDeArchivos;
+import gnz.backend.objetoMovil.Movil;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -81,6 +83,53 @@ public class ManejadorDePanel {
         this.frame.cambiarTextoDeCoordenadas(texto);
         pintarCuadricula(g);
 
+    }
+    
+    public void cargando(Color color, ManejadorDeArchivos man){
+        
+        g = (Graphics2D)this.frame.getMatrizPanel().getGraphics();
+        //this.manMatriz.pintarPared(0, 0, g, ManejadorDePanel.COLOR_SIN_SUPERFICIE); //color gris
+        for (int i = 0; i < 8; i++) {
+            
+            try {
+                switch (i) {
+                    case 0:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c1");
+                    break;
+                    case 1:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c2");
+                    break;
+                    case 2:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c3");
+                    break;
+                    case 3:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c4");
+                    break;
+                    case 4:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c5");
+                    break;
+                    case 5:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c6");
+                    break;
+                    case 6:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c7");
+                    break;
+                    case 7:
+                        man.abrirPalabraPorDefecto(this.frame.getMatrizPanel(),this.manMatriz ,"c8");
+                    break;
+                    default:
+                        throw new AssertionError();
+                }
+                
+            } catch (Exception e) {   
+            
+            }
+            this.frame.getMovil().delay(1000);
+        }
+                                   
+        
+        
+    
     }
     
     private static int encontrarHexadecimal(String color){

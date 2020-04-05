@@ -50,6 +50,7 @@ public class Movil {
 
     //ENTRAR AL MOVIMIENTO
     boolean bandera = true;
+    boolean banderaarco = true;
 
     //ENTRADA A ENVIAR COORDENADAS XY
     boolean banderaXY = true;
@@ -84,6 +85,14 @@ public class Movil {
     //ENIVAR INFO AL TEXTAREA
     JTextArea area;
 
+    //NUEVAS VARIABLES MOVIMIENTO CURVO;
+    int posX;
+    int a;
+    int posY;
+    int b;
+    int finalY;
+    int finalX;
+    
     public Movil(FrameOM frameOm) {
         this.frame = frameOm;
         //DECLARACION DEL HILO
@@ -91,95 +100,342 @@ public class Movil {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String descripcion;
+                //MOVIMIENTO NO CURVO
+                if(Movimientos.get(n).tipo<10){
+                    if (bandera) {
+                        //LIMPIAR VARIABLES Y LLENAR TODAS VARIABLES CON INFORMACION
+
+                        //DELAY DE TIEMPO ENTRE CADA MOVIMIENTO
+                        if (n > 0) {
+                            delay(2000);
+                        }
+                        //Se dibua la cuardicula
+
+                        bandera = false;
+                        x = 0;
+                        y = 0;
+                        x1 = 0;
+                        y1 = 0;
+                        angulo = 0;
+                        angulo1 = 0;
+
+                        //CALCULAR DISTANCIAS
+                        angulo1 = Movimientos.get(n).angulo;
+                        angulo = Math.toRadians(angulo1);
+                        x = (Math.round((Math.cos(angulo)) * Run.MULT * Movimientos.get(n).distancia)) / Run.MULT;
+                        y = (Math.round(((Math.sin(angulo)) * Run.MULT * Movimientos.get(n).distancia) * -1)) / Run.MULT;
+                        distanciat = distanciat + Movimientos.get(n).distancia;
+
+                        //RELACION A USAR YA SEA XY O YX
+                        if (y != 0) {
+                            rxy = (int) Math.abs(Math.round(x / y));
+                        } else {
+                            rxy = 1;
+                        }
+                        if (x != 0) {
+                            ryx = (int) Math.abs(Math.round(y / x));
+                        } else {
+                            ryx = 1;
+                        }
+
+                        //CALCULO DE DISTANCIA FINAL A LA QUE SE LLEGARA
+                        x1 = (Math.round(objetoMovil.getX() + x * Run.MULT));
+                        y1 = (Math.round(objetoMovil.getY() + y * Run.MULT));
+                        if (Movimientos.get(n).velocidad != 2) {
+                            del = (t / Movimientos.get(n).velocidad);
+                        } else {
+                            del = ((t * 2) / 3);
+                        }
+                        //AQUI SE DEBERIAN DE MANDAR LOS MOVIMIENTOS BASE
+                        System.out.println("Cadena de movimiento Base giro: "+Movimientos.get(n).CadenaGiro());
+                        System.out.println("Cadena de movimiento Base recto : "+Movimientos.get(n).CadenaBase());
+                    }
+                    //ENVIAR X (MUEVE UN PIXEL EN X)
+                    if (objetoMovil.getX() != x1) {
+                        if (banderaXY) {
+                            if (angulo1 >= 90 && angulo1 < 271) {
+                                objetoMovil.setLocation(objetoMovil.getX() - 1, objetoMovil.getY());
+                                objetoMovil.repaint();
+                            } else {
+                                objetoMovil.setLocation(objetoMovil.getX() + 1, objetoMovil.getY());
+                                objetoMovil.repaint();
+                            }
+                            cxy = cxy + 1;
+                            if (cxy > rxy) {
+                                cxy = 0;
+                                banderaXY = false;
+                            }
+                        }
+                    } else {
+                        banderaXY = false;
+                    }
+
+                    //ENVIAR Y (MUEVE UN PIXEL EN Y)
+                    if (objetoMovil.getY() != y1) {
+                        if (!banderaXY) {
+                            if (angulo1 >= 180 && angulo < 361) {
+                                objetoMovil.setLocation(objetoMovil.getX(), objetoMovil.getY() + 1);
+                                objetoMovil.repaint();
+                            } else {
+                                objetoMovil.setLocation(objetoMovil.getX(), objetoMovil.getY() - 1);
+                                objetoMovil.repaint();
+                            }
+                            cyx = cyx + 1;
+                            if (cyx > ryx) {
+                                cyx = 0;
+                                banderaXY = true;
+                            }
+                        }
+                    } else {
+                        banderaXY = true;
+                    }
+                }
                 
-                if (bandera) {
-                    //LIMPIAR VARIABLES Y LLENAR TODAS VARIABLES CON INFORMACION
-
-                    //DELAY DE TIEMPO ENTRE CADA MOVIMIENTO
-                    if (n > 0) {
-                        delay(2000);
+                //MOVIMIENTO CURVO
+                else{
+                    //CALCULO DE DISTANCIA 
+                    if(bandera){
+                            if (n > 0) {
+                                delay(2000);
+                            }
+                            //variables de la formula
+                            posX=objetoMovil.getX();
+                            posY=objetoMovil.getY();
+                            b=posY;
+                        
+                        y1=objetoMovil.getY();  //siempre queda en el mismo lugar en Y
+                        if(Movimientos.get(n).tipo<12){
+                            x1=objetoMovil.getX()+(Movimientos.get(n).angulo*2);
+                            a= posX+Movimientos.get(n).angulo;
+                        }else{
+                            x1=objetoMovil.getX()-(Movimientos.get(n).angulo*2);
+                            a= posX-Movimientos.get(n).angulo;
+                        }
+                        bandera=false;
                     }
-                    //Se dibua la cuardicula
-
-                    bandera = false;
-                    x = 0;
-                    y = 0;
-                    x1 = 0;
-                    y1 = 0;
-                    angulo = 0;
-                    angulo1 = 0;
-
-                    //CALCULAR DISTANCIAS
-                    angulo1 = Movimientos.get(n).angulo;
-                    angulo = Math.toRadians(angulo1);
-                    x = (Math.round((Math.cos(angulo)) * Run.MULT * Movimientos.get(n).distancia)) / Run.MULT;
-                    y = (Math.round(((Math.sin(angulo)) * Run.MULT * Movimientos.get(n).distancia) * -1)) / Run.MULT;
-                    distanciat = distanciat + Movimientos.get(n).distancia;
-
-                    //RELACION A USAR YA SEA XY O YX
-                    if (y != 0) {
-                        rxy = (int) Math.abs(Math.round(x / y));
-                    } else {
-                        rxy = 1;
+                    
+                    //n->
+                    switch (Movimientos.get(n).tipo) {
+                        case 10:
+                            if(banderaarco){
+                                //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow((posX-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(b)-(int)((Math.round(Math.pow(resta, (0.5)))));
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY-1;
+                                        //SALIR DEL FOR
+                                        if(posY<finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX+1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX>a){
+                                    banderaarco=false;
+                                    posY=b-Movimientos.get(n).angulo;
+                                    posX=a;
+                                } 
+                            }else{
+                             //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow(((posX+1)-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(b)-(int)((Math.round(Math.pow(resta, (0.5)))));
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY+1;
+                                        //SALIR DEL FOR
+                                        if(posY>finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX+1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX>(a+Movimientos.get(n).angulo)){
+                                    banderaarco=true;
+                                    posY=(int)posY;//b;
+                                    posX=(int)posX;//(a+Movimientos.get(n).angulo);
+                                }                                
+                            }
+                            
+                            break;
+                        case 11:
+                            if(banderaarco){
+                                //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow((posX-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(int)((Math.round(Math.pow(resta, (0.5))))+b);
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY+1;
+                                        //SALIR DEL FOR
+                                        if(posY>finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX+1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX>a){
+                                    banderaarco=false;
+                                    posY=Movimientos.get(n).angulo+b;
+                                    posX=a;
+                                } 
+                            }else{
+                             //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow(((posX+1)-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(int)((Math.round(Math.pow(resta, (0.5))))+b);
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY-1;
+                                        //SALIR DEL FOR
+                                        if(posY<finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX+1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX>(a+Movimientos.get(n).angulo)){
+                                    banderaarco=true;
+                                    posY=(int)posY;//b;
+                                    posX=(int)posX;//(a+Movimientos.get(n).angulo);
+                                }                                
+                            }
+                            break;
+                        case 12:
+                            if(banderaarco){
+                                //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow((posX-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(int)((Math.round(Math.pow(resta, (0.5))))+b);
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY+1;
+                                        //SALIR DEL FOR
+                                        if(posY>finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX-1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX<a){
+                                    banderaarco=false;
+                                    posY=Movimientos.get(n).angulo+b;
+                                    posX=a;
+                                } 
+                            }else{
+                             //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow(((posX-1)-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(int)((Math.round(Math.pow(resta, (0.5))))+b);
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY-1;
+                                        //SALIR DEL FOR
+                                        if(posY<finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX-1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX<(a-Movimientos.get(n).angulo)){
+                                    banderaarco=true;    
+                                }                                
+                            }
+                            break;
+                        default:
+                            if(banderaarco){
+                                //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow((posX-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(b)-(int)((Math.round(Math.pow(resta, (0.5)))));
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY-1;
+                                        //SALIR DEL FOR
+                                        if(posY<finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX-1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX<a){
+                                    banderaarco=false;
+                                    posY=b-Movimientos.get(n).angulo;
+                                    posX=a;
+                                } 
+                            }else{
+                             //CICLO WHILE
+                                if(banderaXY){
+                                    int x2=(int)Math.pow(((posX-1)-a), 2);
+                                    int resta=(Movimientos.get(n).angulo*Movimientos.get(n).angulo)-x2;
+                                    finalY=(b)-(int)((Math.round(Math.pow(resta, (0.5)))));
+                                    banderaXY=false;
+                                }
+                                    //CICLO FOR
+                                    if(!banderaXY){
+                                        objetoMovil.setLocation(posX, posY);
+                                        objetoMovil.repaint();
+                                        posY=posY+1;
+                                        //SALIR DEL FOR
+                                        if(posY>finalY){
+                                            banderaXY=true;
+                                            posY=finalY;
+                                            posX=posX-1;
+                                        }
+                                    }
+                                //SALIR DEL WHILE
+                                if(posX<(a-Movimientos.get(n).angulo)){
+                                    banderaarco=true;    
+                                }                                
+                            }
+                            break;
                     }
-                    if (x != 0) {
-                        ryx = (int) Math.abs(Math.round(y / x));
-                    } else {
-                        ryx = 1;
-                    }
-
-                    //CALCULO DE DISTANCIA FINAL A LA QUE SE LLEGARA
-                    x1 = (Math.round(objetoMovil.getX() + x * Run.MULT));
-                    y1 = (Math.round(objetoMovil.getY() + y * Run.MULT));
-                    if (Movimientos.get(n).velocidad != 2) {
-                        del = (t / Movimientos.get(n).velocidad);
-                    } else {
-                        del = ((t * 2) / 3);
-                    }
-                    //AQUI SE DEBERIAN DE MANDAR LOS MOVIMIENTOS BASE
-                    System.out.println("Cadena de movimiento Base giro: "+Movimientos.get(n).CadenaGiro());
-                    System.out.println("Cadena de movimiento Base recto : "+Movimientos.get(n).CadenaBase());
                 }
-                //ENVIAR X (MUEVE UN PIXEL EN X)
-                if (objetoMovil.getX() != x1) {
-                    if (banderaXY) {
-                        if (angulo1 >= 90 && angulo1 < 271) {
-                            objetoMovil.setLocation(objetoMovil.getX() - 1, objetoMovil.getY());
-                            objetoMovil.repaint();
-                        } else {
-                            objetoMovil.setLocation(objetoMovil.getX() + 1, objetoMovil.getY());
-                            objetoMovil.repaint();
-                        }
-                        cxy = cxy + 1;
-                        if (cxy > rxy) {
-                            cxy = 0;
-                            banderaXY = false;
-                        }
-                    }
-                } else {
-                    banderaXY = false;
-                }
-
-                //ENVIAR Y (MUEVE UN PIXEL EN Y)
-                if (objetoMovil.getY() != y1) {
-                    if (!banderaXY) {
-                        if (angulo1 >= 180 && angulo < 361) {
-                            objetoMovil.setLocation(objetoMovil.getX(), objetoMovil.getY() + 1);
-                            objetoMovil.repaint();
-                        } else {
-                            objetoMovil.setLocation(objetoMovil.getX(), objetoMovil.getY() - 1);
-                            objetoMovil.repaint();
-                        }
-                        cyx = cyx + 1;
-                        if (cyx > ryx) {
-                            cyx = 0;
-                            banderaXY = true;
-                        }
-                    }
-                } else {
-                    banderaXY = true;
-                }
-
+            
                 //PINTAR LAS CORDENADAS EN LOS LABELS DEL FRAME
                 label7.setText("" + (objetoMovil.getX() / Run.MULT));
                 label8.setText("" + (objetoMovil.getY() / Run.MULT));
@@ -347,15 +603,16 @@ Fin trayecto
 2. Ejemplo mas Complejo
 
 Ini  trayecto 
-MovRecto(100 cm, 3, adelante)
 MovRecto(100 cm, 2, abajo)
-MovRecto(100 cm, 1, atras)
+MovRecto(100 cm, 3, adelante)
 MovRecto(100 cm, 3, arriba)
+MovRecto(100 cm, 1, atras)
 MovDiagonal(142 cm, 3, -45 grados)
-MovRecto(100 cm, 3, atras)
-MovDiagonal(142 cm, 3, 45 grados)
-MovRecto(100 cm, 3, atras)
+MovRecto(100 cm, 3, arriba)
+MovDiagonal(142 cm, 3, 225 grados)
+MovCurvo(40 cm, 3, adelante, arriba)
+MovCurvo(40 cm, 3, adelante, abajo)
+MovCurvo(40 cm, 3, atras, arriba)
+MovCurvo(40 cm, 3, atras, abajo)
 Fin trayecto
-
-
  */

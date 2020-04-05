@@ -42,6 +42,7 @@ id=[A-Za-z]+["_"0-9A-Za-z]*
 "trayecto"          {return new Symbol(sym1.RTra,yyline,yycolumn,yytext());}
 "MovRecto"          {return new Symbol(sym1.RMre,yyline,yycolumn,yytext());}
 "MovDiagonal"       {return new Symbol(sym1.RMdi,yyline,yycolumn,yytext());}
+"MovCurvo"          {return new Symbol(sym1.RMcu,yyline,yycolumn,yytext());}
 "adelante"          {return new Symbol(sym1.RAde,yyline,yycolumn,yytext());}
 "atras"             {return new Symbol(sym1.RAtr,yyline,yycolumn,yytext());}
 "arriba"            {return new Symbol(sym1.RArr,yyline,yycolumn,yytext());}
